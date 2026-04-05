@@ -1,0 +1,98 @@
+---
+import ServiceCard from '../../shared/cards/ServiceCard.astro'
+---
+
+<!-- Services Section (Bento Grid Style) -->
+    <section class="py-32 px-8 max-w-7xl mx-auto" id="servicios">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div class="max-w-2xl">
+                <h2 class="text-4xl font-headline font-extrabold tracking-tight mb-4">Nuestros Servicios</h2>
+                <div class="h-0.5 w-24 primary-gradient mb-6"></div>
+                <p class="text-on-surface-variant text-lg">Soluciones técnicas diseñadas para escalar con la ambición de
+                    tu empresa.</p>
+            </div>
+            <span class="text-xs font-mono text-outline uppercase tracking-[0.2em]">Engineering Excellence</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Card 1 -->
+            <div
+                class="glass-card p-8 rounded-full flex flex-col gap-6 group hover:border-primary/40 transition-colors">
+                <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <span class="material-symbols-outlined text-3xl" data-icon="custom_typography">data_object</span>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Software a Medida</h3>
+                    <p class="text-on-surface-variant text-sm leading-relaxed">Arquitecturas robustas diseñadas desde
+                        cero para resolver problemas operativos complejos.</p>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div
+                class="glass-card p-8 rounded-full flex flex-col gap-6 group hover:border-primary/40 transition-colors">
+                <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <span class="material-symbols-outlined text-3xl" data-icon="devices">devices</span>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Web y Móvil</h3>
+                    <p class="text-on-surface-variant text-sm leading-relaxed">Experiencias digitales de alta gama con
+                        foco en rendimiento, UX y accesibilidad universal.</p>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div
+                class="glass-card p-8 rounded-full flex flex-col gap-6 group hover:border-primary/40 transition-colors">
+                <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <span class="material-symbols-outlined text-3xl" data-icon="smart_toy">smart_toy</span>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">IA &amp; Automatización</h3>
+                    <p class="text-on-surface-variant text-sm leading-relaxed">Implementación de LLMs y modelos
+                        predictivos para optimizar la toma de decisiones.</p>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div
+                class="glass-card p-8 rounded-full flex flex-col gap-6 group hover:border-primary/40 transition-colors">
+                <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <span class="material-symbols-outlined text-3xl" data-icon="troubleshoot">troubleshoot</span>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Consultoría IT</h3>
+                    <p class="text-on-surface-variant text-sm leading-relaxed">Asesoría estratégica en transformación
+                        digital y modernización de infraestructuras legacy.</p>
+                </div>
+            </div>
+            <!-- Card 5 -->
+            <div
+                class="glass-card p-8 rounded-full flex flex-col gap-6 group hover:border-primary/40 transition-colors">
+                <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <span class="material-symbols-outlined text-3xl" data-icon="account_balance">account_balance</span>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Sistemas Institucionales</h3>
+                    <p class="text-on-surface-variant text-sm leading-relaxed">Desarrollo de ERPs y sistemas de gestión
+                        de alto cumplimiento para el sector público y privado.</p>
+                </div>
+            </div>
+            <!-- Card 6 -->
+            <div
+                class="glass-card p-8 rounded-full flex flex-col gap-6 group hover:border-primary/40 transition-colors">
+                <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <span class="material-symbols-outlined text-3xl" data-icon="cloud_done">cloud_done</span>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">DevOps &amp; Cloud</h3>
+                    <p class="text-on-surface-variant text-sm leading-relaxed">Despliegue continuo, escalabilidad
+                        automática y seguridad nivel bancario en la nube.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<style>
+    .glass-card {
+        background: rgba(37, 37, 45, 0.6);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(188, 157, 255, 0.1);
+    }
+</style>

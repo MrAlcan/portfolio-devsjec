@@ -1,0 +1,43 @@
+<!-- Hero Section -->
+    <section class="relative min-h-screen pt-32 pb-20 overflow-hidden flex items-center justify-center hero-gradient">
+        <!-- Floating Shapes -->
+        <div class="absolute top-20 left-10 w-64 h-64 bg-primary/10 blur-[100px] rounded-full"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-secondary/10 blur-[120px] rounded-full"></div>
+        <div class="max-w-7xl mx-auto px-8 relative z-10 text-center">
+            <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container border border-outline-variant/30 text-xs font-mono mb-8">
+                <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                <span class="text-on-surface-variant">AVAILABLE FOR NEW PROJECTS</span>
+            </div>
+            <h1
+                class="text-5xl md:text-8xl font-headline font-extrabold tracking-tighter text-gradient mb-6 leading-tight">
+                Construimos el software que <br /> transforma tu negocio
+            </h1>
+            <p class="max-w-2xl mx-auto text-lg md:text-xl text-on-surface-variant mb-12 font-light">
+                Consultoría técnica de alto nivel especializada en arquitectura escalable, IA y desarrollo de sistemas
+                críticos.
+                <span class="block mt-2 text-primary/80 font-mono text-sm">Bolivia &amp; Regional Reach</span>
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button
+                    class="w-full sm:w-auto primary-gradient text-on-primary-container px-8 py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+                    Empezar un proyecto <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+                <button
+                    class="w-full sm:w-auto border border-outline-variant/40 bg-surface-container/20 backdrop-blur px-8 py-4 rounded-xl font-bold text-on-surface hover:bg-surface-container-high transition-colors">
+                    Ver Portafolio
+                </button>
+            </div>
+        </div>
+    </section>
+
+<style>
+    .hero-gradient {
+        background: radial-gradient(circle at 50% 50%, rgba(108, 63, 197, 0.15) 0%, transparent 70%);
+    }
+    .text-gradient {
+        background: linear-gradient(135deg, #bc9dff 0%, #ffffff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+</style>

@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+
+  /* Custom colors */
+  --color-on-tertiary-fixed: #380016;
+  --color-error-dim: #d73357;
+  --color-inverse-surface: #fcf8ff;
+  --color-surface-bright: #2c2b33;
+  --color-on-tertiary-container: #550026;
+  --color-surface-tint: #bc9dff;
+  --color-surface-container-highest: #25252d;
+  --color-surface-container-low: #131319;
+  --color-background: #0e0e13;
+  --color-on-background: #f9f5fd;
+  --color-surface: #0e0e13;
+  --color-on-error: #490013;
+  --color-outline-variant: #48474d;
+  --color-on-secondary: #33005b;
+  --color-primary-dim: #ae89ff;
+  --color-primary: #bc9dff;
+  --color-secondary-container: #6f00be;
+  --color-tertiary-fixed: #ff8eae;
+  --color-primary-fixed-dim: #a47bff;
+  --color-secondary-dim: #9c48ea;
+  --color-surface-dim: #0e0e13;
+  --color-on-secondary-container: #e9cdff;
+  --color-inverse-on-surface: #55545b;
+  --color-error: #ff6e84;
+  --color-secondary: #c180ff;
+  --color-secondary-fixed-dim: #dbb4ff;
+  --color-surface-container-lowest: #000000;
+  --color-on-primary-fixed-variant: #380084;
+  --color-on-primary-fixed: #000000;
+  --color-tertiary-dim: #f0779b;
+  --color-on-tertiary-fixed-variant: #701037;
+  --color-primary-container: #b08cff;
+  --color-on-error-container: #ffb2b9;
+  --color-tertiary: #ff93b0;
+  --color-inverse-primary: #6f42c8;
+  --color-on-tertiary: #670730;
+  --color-error-container: #a70138;
+  --color-on-surface: #f9f5fd;
+  --color-secondary-fixed: #e5c6ff;
+  --color-on-primary-container: #2d006d;
+  --color-outline: #76747b;
+  --color-surface-container-high: #1f1f26;
+  --color-primary-fixed: #b08cff;
+  --color-on-primary: #3b008a;
+  --color-tertiary-container: #fa7ea3;
+  --color-on-secondary-fixed-variant: #7511c3;
+  --color-surface-variant: #25252d;
+  --color-tertiary-fixed-dim: #f77ca0;
+  --color-on-secondary-fixed: #4f0089;
+  --color-on-surface-variant: #acaab1;
+  --color-surface-container: #19191f;
+
+  /* Custom fonts */
+  --font-headline: "Plus Jakarta Sans", ui-sans-serif, system-ui;
+  --font-body: "Inter", ui-sans-serif, system-ui;
+  --font-label: "Inter", ui-sans-serif, system-ui;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  /* Custom Radius */
+  --radius-default: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+}
+
+@keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-marquee {
+            animation: marquee 30s linear infinite;
+        }
+        .primary-gradient {
+            background: linear-gradient(135deg, #bc9dff 0%, #c180ff 100%);
+        } 
