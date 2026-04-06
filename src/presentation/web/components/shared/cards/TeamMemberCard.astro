@@ -16,8 +16,10 @@ const { imageUrl, imageAlt, name, role, description }: Props = Astro.props;
       <div class="bg-background rounded-full w-full h-full p-1">
         <img
           class="w-full h-full object-cover rounded-full"
-          data-alt={ imageAlt }
+          alt={ imageAlt }
           src={ imageUrl }
+          loading="lazy"
+          decoding="async"
         />
       </div>
     </div>
@@ -32,12 +34,12 @@ const { imageUrl, imageAlt, name, role, description }: Props = Astro.props;
     { description }
   </p>
   <div class="flex justify-center gap-4">
-    <span class="material-symbols-outlined text-outline-variant hover:text-primary cursor-pointer" data-icon="hub">
+    <button class="material-symbols-outlined text-outline-variant hover:text-primary cursor-pointer" aria-label="Ver perfil profesional" data-icon="hub">
       hub
-    </span>
-    <span class="material-symbols-outlined text-outline-variant hover:text-primary cursor-pointer" data-icon="share">
+    </button>
+    <button class="material-symbols-outlined text-outline-variant hover:text-primary cursor-pointer" aria-label="Compartir perfil" data-icon="share">
       share
-    </span>
+    </button>
   </div>
 </div>
 <style>

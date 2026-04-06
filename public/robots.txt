@@ -1,0 +1,23 @@
+# robots.txt para DEVSJEC SRL
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://devsjec.com/sitemap.xml
+
+# Bloquear acceso a directorios internos (si existen)
+Disallow: /api/
+Disallow: /_astro/
+Disallow: /node_modules/
+
+# Permitir rastreo de recursos estáticos
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.webp$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.svg$
+
+# Crawl delay (opcional, ajusta según necesidad)
+# Crawl-delay: 10

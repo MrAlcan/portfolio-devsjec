@@ -1,22 +1,105 @@
 ---
 import '../../assets/styles/global.css'
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  ogImage?: string;
+  ogType?: string;
+  canonicalUrl?: string;
+  author?: string;
+  twitterHandle?: string;
+}
+
+const {
+  title = 'DEVSJEC SRL - Software que transforma tu negocio',
+  description = 'Consultoría técnica especializada en arquitectura escalable, desarrollo de IA y sistemas críticos. Transformamos ideas en soluciones tecnológicas innovadoras en La Paz, Bolivia.',
+  keywords = 'desarrollo software, consultoría técnica, arquitectura escalable, IA, inteligencia artificial, sistemas críticos, desarrollo web, Bolivia, La Paz, DevOps, cloud computing',
+  ogImage = '/og-image.png',
+  ogType = 'website',
+  canonicalUrl = Astro.url.href,
+  author = 'MrAlcan',
+  twitterHandle = '@devsjec'
+} = Astro.props;
+
+const siteUrl = Astro.site || 'https://devsjec.com';
 ---
 
 <html lang="es">
   <head>
+    <!-- Charset y Viewport -->
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Básico -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content={author} />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, siteUrl).href} />
+    <meta property="og:site_name" content="DEVSJEC SRL" />
+    <meta property="og:locale" content="es_BO" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, siteUrl).href} />
+    <meta name="twitter:creator" content={twitterHandle} />
+
+    <!-- Preconnect para mejorar performance de fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <title>DevsJec SRL</title>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "DEVSJEC SRL",
+      "url": siteUrl,
+      "logo": new URL("/logo.png", siteUrl).href,
+      "description": "Consultoría técnica especializada en arquitectura escalable, desarrollo de IA y sistemas críticos",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "La Paz",
+        "addressCountry": "BO"
+      },
+      "sameAs": [
+        "https://linkedin.com/company/devsjec",
+        "https://twitter.com/devsjec"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Sales",
+        "email": "contacto@devsjec.com",
+        "availableLanguage": ["es", "en"]
+      }
+    })} />
   </head>
   <body>
     <slot />

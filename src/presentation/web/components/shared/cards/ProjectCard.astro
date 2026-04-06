@@ -14,8 +14,10 @@ const { imgUrl, alt, category, title, description } = Astro.props
   <div class="relative aspect-video rounded-xl overflow-hidden mb-6 bg-surface-container">
     <img
       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-60"
-      data-alt={ alt }
+      alt={ alt }
       src={ imgUrl }
+      loading="lazy"
+      decoding="async"
     />
     <div class="absolute inset-0 bg-linear-to-t from-background to-transparent"></div>
     <div class="absolute bottom-4 left-4">
