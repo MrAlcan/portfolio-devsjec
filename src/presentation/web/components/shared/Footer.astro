@@ -1,3 +1,6 @@
+---
+import { PUBLIC_ENVIRONMENTS } from '../../../../infrastructure/config/public-enviroments'
+---
 <!-- Footer -->
     <footer class="w-full py-16 px-8 border-t border-[#bc9dff]/10 bg-surface-container-low">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
@@ -30,11 +33,11 @@
                 <h6 class="text-white font-bold mb-4">Contacto</h6>
                 <ul class="space-y-3 font-inter text-sm">
                     <li><a class="text-white/40 hover:text-[#bc9dff] hover:translate-x-1 transition-transform inline-block"
-                            href="#">La Paz, Bolivia</a></li>
+                            href="#">{ PUBLIC_ENVIRONMENTS.COMPANY_LOCATION }</a></li>
                     <li><a class="text-white/40 hover:text-[#bc9dff] hover:translate-x-1 transition-transform inline-block"
-                            href="#">hello@devsjec.com</a></li>
+                            href="#">{ PUBLIC_ENVIRONMENTS.COMPANY_EMAIL }</a></li>
                     <li><a class="text-white/40 hover:text-[#bc9dff] hover:translate-x-1 transition-transform inline-block"
-                            href="#">+591 77251751</a></li>
+                            href="#">{ PUBLIC_ENVIRONMENTS.COMPANY_WHATSAPP }</a></li>
                 </ul>
             </div>
             <div class="md:col-span-1">
@@ -48,7 +51,7 @@
         </div>
         <div
             class="max-w-7xl mx-auto px-8 mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p class="font-inter text-sm text-white/60">© 2026 DEVSJEC SRL. La Paz, Bolivia.</p>
+            <p class="font-inter text-sm text-white/60">© 2026 { PUBLIC_ENVIRONMENTS.COMPANY_NAME } SRL. { PUBLIC_ENVIRONMENTS.COMPANY_LOCATION }.</p>
             <!--div class="flex gap-6 font-inter text-xs text-white/40">
                 <a class="hover:text-[#bc9dff]" href="#">Privacidad</a>
                 <a class="hover:text-[#bc9dff]" href="#">Términos</a>

@@ -1,45 +1,46 @@
 ---
+import { PUBLIC_ENVIRONMENTS } from '../../../../../infrastructure/config/public-enviroments'
 import ContactForm from "../../shared/ContactForm.astro"
 
 ---
 
 <!-- Contact Section -->
-    <section class="py-32 bg-surface-container-low" id="contacto">
-        <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16">
-            <div>
-                <h2 class="text-4xl font-headline font-extrabold tracking-tight mb-8">Hablemos de tu próximo paso</h2>
-                <p class="text-on-surface-variant text-lg mb-12">Estamos listos para materializar tu visión técnica.
-                    Contáctanos para una consultoría inicial sin compromiso.</p>
-                <div class="space-y-8">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                            <span class="material-symbols-outlined">location_on</span>
-                        </div>
-                        <div>
-                            <p class="text-xs font-mono uppercase text-outline">Ubicación</p>
-                            <p class="font-bold">La Paz, Bolivia</p>
-                        </div>
+<section class="py-32 bg-surface-container-low" id="contacto">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div>
+            <h2 class="text-4xl font-headline font-extrabold tracking-tight mb-8">Hablemos de tu próximo paso</h2>
+            <p class="text-on-surface-variant text-lg mb-12">Estamos listos para materializar tu visión técnica.
+                Contáctanos para una consultoría inicial sin compromiso.</p>
+            <div class="space-y-8">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined">location_on</span>
                     </div>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                            <span class="material-symbols-outlined">mail</span>
-                        </div>
-                        <div>
-                            <p class="text-xs font-mono uppercase text-outline">Email</p>
-                            <p class="font-bold">contacto@devsjec.com</p>
-                        </div>
+                    <div>
+                        <p class="text-xs font-mono uppercase text-outline">Ubicación</p>
+                        <p class="font-bold">{ PUBLIC_ENVIRONMENTS.COMPANY_LOCATION }</p>
                     </div>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                            <span class="material-symbols-outlined">chat</span>
-                        </div>
-                        <div>
-                            <p class="text-xs font-mono uppercase text-outline">WhatsApp</p>
-                            <p class="font-bold text-primary">+591 77251751</p>
-                        </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined">mail</span>
+                    </div>
+                    <div>
+                        <p class="text-xs font-mono uppercase text-outline">Email</p>
+                        <p class="font-bold">{ PUBLIC_ENVIRONMENTS.COMPANY_EMAIL }</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined">chat</span>
+                    </div>
+                    <div>
+                        <p class="text-xs font-mono uppercase text-outline">WhatsApp</p>
+                        <p class="font-bold text-primary">{ PUBLIC_ENVIRONMENTS.COMPANY_WHATSAPP }</p>
                     </div>
                 </div>
             </div>
-            <ContactForm/>
         </div>
-    </section>
+        <ContactForm/>
+    </div>
+</section>

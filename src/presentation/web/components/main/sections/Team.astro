@@ -1,4 +1,5 @@
 ---
+import { PUBLIC_ENVIRONMENTS } from '../../../../../infrastructure/config/public-enviroments'
 import TeamMemberCard from '../../shared/cards/TeamMemberCard.astro'
 
 interface Member {
@@ -11,24 +12,24 @@ interface Member {
 
 const members: Member[] = [
     {
-        name: "Alejandro J.",
-        role: "Senior Backend Architect",
-        description: "Especialista en Go y sistemas distribuidos de alta disponibilidad.",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAbv1TlJPDU7nZFmOFbQAlL0GZF3ssd6IsImvyiVQGlonx-LcietcIlzKJKAr8rByjADfOmQQ9qUb9IuyNenObqUT35EGkOY_sQ71bJ4ftmry1oCqQhbMpsHLhiGLtEywZR7CMHNXGQXwmZ5Aczvpk_vO-BFDotBqx-NuywOb8SxQLae7DEwzbxNaUtIvMPu_m9_P-bHgTHjxWsNT0R7LS9Z-lz3-JTx4z5ZBO8C0qYx8lkwkY1SYkg6Nc--ZwubzWUqxSL39KzLFGn",
-        imageAlt: "Portrait of a professional male software engineer with a confident expression in dark studio lighting"
+        name: PUBLIC_ENVIRONMENTS.MEMBER1_NAME,
+        role: PUBLIC_ENVIRONMENTS.MEMBER1_ROLE_ES,
+        description: PUBLIC_ENVIRONMENTS.MEMBER1_BIO_ES,
+        image: PUBLIC_ENVIRONMENTS.MEMBER1_PHOTO,
+        imageAlt: "Portrait of a technical director in business casual attire with soft bokeh background"
     },
     {
-        name: "Dra. Sofia E.",
-        role: "Lead Frontend Engineer",
-        description: "Experta en UX, accesibilidad y arquitecturas escalables de React.",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCVcM6GT-qwWoQrOhMkBdrkb32Qh0Q5TUvyhddtmkYXuJlvCqPJh9TUeB6S7GEr1pqjRCsmyPyWGcqmu0jiUDptxj4tKMC9ox9GENpAbDu6NjHo0HiK9KUNbWiXYbbAwa9thkfH-51YzYh35-VINj1mjX-rMgYV2UXTW-2zcI2VbEgWgPvOxiFBkCFsO4U94U3amaI-DzHp-kH1_9Ezl12_I6KtTQW_6oI39cf_2GDobv0qiTRGcmnCfMx8L8U1xptEDXM6c26qRrOL",
-        imageAlt: "Portrait of a professional female lead developer with creative glasses in a modern office environment"
+        name: PUBLIC_ENVIRONMENTS.MEMBER2_NAME,
+        role: PUBLIC_ENVIRONMENTS.MEMBER2_ROLE_ES,
+        description: PUBLIC_ENVIRONMENTS.MEMBER2_BIO_ES,
+        image: PUBLIC_ENVIRONMENTS.MEMBER2_PHOTO,
+        imageAlt: "Portrait of a technical director in business casual attire with soft bokeh background"
     },
     {
-        name: "Ing. Marcos C.",
-        role: "DevOps Specialist",
-        description: "Maestro de Kubernetes, automatización CI/CD y seguridad Cloud.",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAtPsa1oSuRwTttJNGCksYX1woCMoJXDasYVnixb6OPzJA0xGS403gH79bNc5k4JKSP8bKJ8zrW2ay3arlXuW6dVazQUUtEUXdo4o1wt5haDpDhvRs7L6n0swFWpPtydPD_VznabM-gSekHFAvuKpB8QG95JYf9dCQSPQel0RdnjzNULnO4gD1D8zmAbsMLEeNBtywgR9QPUQsggkYrSZvViEs6AYmkrm-_Hp--D6h0RuOvQbQ0d6T8-BbwncuYQYl6vue8eHqo12NB",
+        name: PUBLIC_ENVIRONMENTS.MEMBER3_NAME,
+        role: PUBLIC_ENVIRONMENTS.MEMBER3_ROLE_ES,
+        description: PUBLIC_ENVIRONMENTS.MEMBER3_BIO_ES,
+        image: PUBLIC_ENVIRONMENTS.MEMBER3_PHOTO,
         imageAlt: "Portrait of a technical director in business casual attire with soft bokeh background"
     }
 ]

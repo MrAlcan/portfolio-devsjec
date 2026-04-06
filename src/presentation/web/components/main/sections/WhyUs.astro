@@ -1,4 +1,5 @@
 ---
+import { PUBLIC_ENVIRONMENTS } from '../../../../../infrastructure/config/public-enviroments'
 import WhyUsItemList from '../../shared/itemList/WhyUsItemList.astro'
 
 const startCorch = "{"
@@ -37,7 +38,7 @@ const items: ItemList[] = [
     <section class="bg-surface-container-low py-32 overflow-hidden" id="nosotros">
         <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div>
-                <h2 class="text-4xl font-headline font-extrabold tracking-tight mb-8">¿Por qué DEVSJEC?</h2>
+                <h2 class="text-4xl font-headline font-extrabold tracking-tight mb-8">¿Por qué { PUBLIC_ENVIRONMENTS.COMPANY_NAME }?</h2>
                 <div class="space-y-12">
                     {
                         items.map((item) => (

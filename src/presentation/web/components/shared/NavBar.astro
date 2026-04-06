@@ -1,9 +1,10 @@
 ---
+import { PUBLIC_ENVIRONMENTS } from '../../../../infrastructure/config/public-enviroments'
 ---
 
 <header class="fixed top-0 w-full z-50 bg-[#0e0e13]/60 backdrop-blur-xl border-b border-[#bc9dff]/10 shadow-[0_20px_40px_rgba(108,63,197,0.08)]">
   <nav class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
-    <div class="text-2xl font-black text-[#bc9dff] tracking-tighter font-headline">DEVSJEC</div>
+    <div class="text-2xl font-black text-[#bc9dff] tracking-tighter font-headline">{ PUBLIC_ENVIRONMENTS.COMPANY_NAME }</div>
     <div class="hidden md:flex items-center space-gap-8 gap-x-8">
       <a class="text-[#bc9dff] border-b-2 border-[#bc9dff] pb-1 font-headline font-extrabold tracking-tight"
         href="#servicios">Servicios</a>

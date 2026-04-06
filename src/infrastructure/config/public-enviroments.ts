@@ -1,0 +1,24 @@
+export const PUBLIC_ENVIRONMENTS = {
+    API_URL: import.meta.env.PUBLIC_API_URL,
+    COMPANY_NAME: import.meta.env.PUBLIC_COMPANY_NAME,
+    COMPANY_EMAIL: import.meta.env.PUBLIC_COMPANY_EMAIL,
+    COMPANY_WHATSAPP: import.meta.env.PUBLIC_COMPANY_WHATSAPP,
+    COMPANY_LOCATION: import.meta.env.PUBLIC_COMPANY_LOCATION,
+
+    COMPANY_STACK: import.meta.env.PUBLIC_COMPANY_STACK,
+
+    MEMBER1_NAME: import.meta.env.PUBLIC_MEMBER1_NAME,
+    MEMBER1_ROLE_ES: import.meta.env.PUBLIC_MEMBER1_ROLE_ES,
+    MEMBER1_BIO_ES: import.meta.env.PUBLIC_MEMBER1_BIO_ES,
+    MEMBER1_PHOTO: import.meta.env.PUBLIC_MEMBER1_PHOTO,
+
+    MEMBER2_NAME: import.meta.env.PUBLIC_MEMBER2_NAME,
+    MEMBER2_ROLE_ES: import.meta.env.PUBLIC_MEMBER2_ROLE_ES,
+    MEMBER2_BIO_ES: import.meta.env.PUBLIC_MEMBER2_BIO_ES,
+    MEMBER2_PHOTO: import.meta.env.PUBLIC_MEMBER2_PHOTO,
+
+    MEMBER3_NAME: import.meta.env.PUBLIC_MEMBER3_NAME,
+    MEMBER3_ROLE_ES: import.meta.env.PUBLIC_MEMBER3_ROLE_ES,
+    MEMBER3_BIO_ES: import.meta.env.PUBLIC_MEMBER3_BIO_ES,
+    MEMBER3_PHOTO: import.meta.env.PUBLIC_MEMBER3_PHOTO,
+} as const
