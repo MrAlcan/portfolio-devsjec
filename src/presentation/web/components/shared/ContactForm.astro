@@ -1,28 +1,32 @@
 <div class="bg-surface-container border border-outline-variant/30 p-8 rounded-xl">
-    <form class="space-y-6">
+    <form class="space-y-6" id="contact-form">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="space-y-2">
                 <label class="text-xs font-mono text-outline uppercase">Nombre Completo</label>
                 <input
+                    name="fullName"
                     class="w-full bg-surface-container-low border-0 focus:ring-2 focus:ring-primary rounded-xl p-4 text-on-surface"
-                    placeholder="John Doe" type="text" />
+                    placeholder="Tu nombre" type="text" />
             </div>
             <div class="space-y-2">
                 <label class="text-xs font-mono text-outline uppercase">Empresa</label>
                 <input
+                    name="company"
                     class="w-full bg-surface-container-low border-0 focus:ring-2 focus:ring-primary rounded-xl p-4 text-on-surface"
-                    placeholder="Your Corp" type="text" />
+                    placeholder="Tu Empresa" type="text" />
             </div>
         </div>
         <div class="space-y-2">
             <label class="text-xs font-mono text-outline uppercase">Email de contacto</label>
             <input
+                name="email"
                 class="w-full bg-surface-container-low border-0 focus:ring-2 focus:ring-primary rounded-xl p-4 text-on-surface"
-                placeholder="john@example.com" type="email" />
+                placeholder="person@ejemplo.com" type="email" />
         </div>
         <div class="space-y-2">
             <label class="text-xs font-mono text-outline uppercase">Tu Mensaje</label>
             <textarea
+                name="message"
                 class="w-full bg-surface-container-low border-0 focus:ring-2 focus:ring-primary rounded-xl p-4 text-on-surface"
                 placeholder="Cuéntanos sobre tu proyecto..." rows="4"></textarea>
         </div>
@@ -32,3 +36,28 @@
         </button>
     </form>
 </div>
+
+<script>
+    import { actions } from 'astro:actions'
+    const form = document.querySelector('#contact-form');
+
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const fullNameInput = form.querySelector('input[name="fullName"]') as HTMLInputElement;
+            const companyInput = form.querySelector('input[name="company"]') as HTMLInputElement;
+            const emailInput = form.querySelector('input[name="email"]') as HTMLInputElement;
+            const messageInput = form.querySelector('textarea[name="message"]') as HTMLTextAreaElement;
+
+            const formDataJSON = {
+                name: fullNameInput.value || '',
+                company: companyInput.value || '',
+                email: emailInput.value || '',
+                message: messageInput.value || ''
+            };
+
+            const result = await actions.sendEmail(formDataJSON);
+        });
+    }
+</script>

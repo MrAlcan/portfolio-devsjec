@@ -3,7 +3,7 @@ import { getSendEmailUseCase } from '../../provider/contact.provider'
 import { z } from 'zod'
 
 export const sendEmail = defineAction({
-  accept: 'form',
+  accept: 'json',
   input: z.object({
     name: z.string(),
     company: z.string(),
