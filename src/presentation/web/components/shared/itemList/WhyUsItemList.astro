@@ -1,0 +1,27 @@
+---
+interface Props {
+    icon: string
+    dataIcon: string
+    title: string
+    description: string
+}
+
+const { dataIcon, icon, title, description } = Astro.props
+---
+
+<div class="flex gap-6">
+    <span
+        class="material-symbols-outlined text-primary text-3xl"
+        data-icon={ dataIcon }
+    >
+        { icon }
+    </span>
+    <div>
+        <h4 class="text-xl font-bold mb-2">
+            { title }
+        </h4>
+        <p class="text-on-surface-variant">
+            { description }
+        </p>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+---
+interface Props {
+  imageUrl: string
+  imageAlt: string
+  name: string
+  role: string
+  description: string
+}
+
+const { imageUrl, imageAlt, name, role, description }: Props = Astro.props;
+---
+
+<div class="glass-card p-8 rounded-full text-center">
+  <div class="relative w-32 h-32 mx-auto mb-6">
+    <div class="absolute inset-0 primary-gradient rounded-full p-1">
+      <div class="bg-background rounded-full w-full h-full p-1">
+        <img
+          class="w-full h-full object-cover rounded-full"
+          data-alt={ imageAlt }
+          src={ imageUrl }
+        />
+      </div>
+    </div>
+  </div>
+  <h4 class="text-xl font-bold mb-1">
+    { name }
+  </h4>
+  <p class="text-primary text-sm font-mono mb-4 uppercase">
+    { role }
+  </p>
+  <p class="text-on-surface-variant text-sm mb-6">
+    { description }
+  </p>
+  <div class="flex justify-center gap-4">
+    <span class="material-symbols-outlined text-outline-variant hover:text-primary cursor-pointer" data-icon="hub">
+      hub
+    </span>
+    <span class="material-symbols-outlined text-outline-variant hover:text-primary cursor-pointer" data-icon="share">
+      share
+    </span>
+  </div>
+</div>
+<style>
+  .glass-card {
+    background: rgba(37, 37, 45, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(188, 157, 255, 0.1);
+  }
+</style>

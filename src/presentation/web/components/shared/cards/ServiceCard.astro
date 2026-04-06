@@ -9,6 +9,7 @@ interface Props {
 
 let { dataIcon, icon, title, description }: Props = Astro.props
 
+//TODO: Hover no funciona
 ---
 
 <div class="glass-card p-8 rounded-full flex flex-col gap-6 group hover:border-primary/40 transition-colors">
@@ -22,3 +23,10 @@ let { dataIcon, icon, title, description }: Props = Astro.props
     </p>
   </div>
 </div>
+<style>
+    .glass-card {
+        background: rgba(37, 37, 45, 0.6);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(188, 157, 255, 0.1);
+    }
+</style>

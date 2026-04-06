@@ -1,0 +1,34 @@
+<div class="bg-surface-container border border-outline-variant/30 p-8 rounded-xl">
+    <form class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-2">
+                <label class="text-xs font-mono text-outline uppercase">Nombre Completo</label>
+                <input
+                    class="w-full bg-surface-container-low border-0 focus:ring-2 focus:ring-primary rounded-xl p-4 text-on-surface"
+                    placeholder="John Doe" type="text" />
+            </div>
+            <div class="space-y-2">
+                <label class="text-xs font-mono text-outline uppercase">Empresa</label>
+                <input
+                    class="w-full bg-surface-container-low border-0 focus:ring-2 focus:ring-primary rounded-xl p-4 text-on-surface"
+                    placeholder="Your Corp" type="text" />
+            </div>
+        </div>
+        <div class="space-y-2">
+            <label class="text-xs font-mono text-outline uppercase">Email de contacto</label>
+            <input
+                class="w-full bg-surface-container-low border-0 focus:ring-2 focus:ring-primary rounded-xl p-4 text-on-surface"
+                placeholder="john@example.com" type="email" />
+        </div>
+        <div class="space-y-2">
+            <label class="text-xs font-mono text-outline uppercase">Tu Mensaje</label>
+            <textarea
+                class="w-full bg-surface-container-low border-0 focus:ring-2 focus:ring-primary rounded-xl p-4 text-on-surface"
+                placeholder="Cuéntanos sobre tu proyecto..." rows="4"></textarea>
+        </div>
+        <button
+            class="w-full primary-gradient text-on-primary-container font-bold py-4 rounded-xl hover:opacity-90 transition-opacity">
+            Enviar Mensaje
+        </button>
+    </form>
+</div>

@@ -1,0 +1,14 @@
+---
+interface Props {
+  href: string
+  children: string
+}
+
+const { href, children } = Astro.props as Props
+---
+<a
+  class="text-white/70 hover:text-white transition-colors font-headline font-extrabold tracking-tight"
+  href={ href }
+>
+  { children }
+</a>

@@ -1,14 +1,36 @@
 ---
+import WhyUsItemList from '../../shared/itemList/WhyUsItemList.astro'
 
-const textCode1 = ""
-const textCode2 = ""
-const textCode3 = ""
-const textCode4 = ""
-const textCode5 = ""
-const textCode6 = ""
-const textCode7 = ""
 const startCorch = "{"
 const endCorch = "}"
+
+interface ItemList {
+    icon: string
+    dataIcon: string
+    title: string
+    description: string
+}
+
+const items: ItemList[] = [
+    {
+        icon: "verified",
+        dataIcon: "verified",
+        title: "Clean Code Architecture",
+        description: "Priorizamos la mantenibilidad y escalabilidad del código. Software que no envejece, evoluciona."
+    },
+    {
+        icon: "shutter_speed",
+        dataIcon: "shutter_speed",
+        title: "Committed Delivery",
+        description: "Metodologías ágiles que garantizan visibilidad total y cumplimiento estricto de plazos."
+    },
+    {
+        icon: "psychology",
+        dataIcon: "psychology",
+        title: "Technical Experts",
+        description: "Ingenieros Senior con experiencia en proyectos de impacto nacional y regional."
+    }
+]
 
 ---
 <!-- Why Us & Code Block Section -->
@@ -17,33 +39,11 @@ const endCorch = "}"
             <div>
                 <h2 class="text-4xl font-headline font-extrabold tracking-tight mb-8">Por qué DEVSJEC?</h2>
                 <div class="space-y-12">
-                    <div class="flex gap-6">
-                        <span class="material-symbols-outlined text-primary text-3xl"
-                            data-icon="verified">verified</span>
-                        <div>
-                            <h4 class="text-xl font-bold mb-2">Clean Code Architecture</h4>
-                            <p class="text-on-surface-variant">Priorizamos la mantenibilidad y escalabilidad del código.
-                                Software que no envejece, evoluciona.</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-6">
-                        <span class="material-symbols-outlined text-primary text-3xl"
-                            data-icon="shutter_speed">shutter_speed</span>
-                        <div>
-                            <h4 class="text-xl font-bold mb-2">Committed Delivery</h4>
-                            <p class="text-on-surface-variant">Metodologías ágiles que garantizan visibilidad total y
-                                cumplimiento estricto de plazos.</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-6">
-                        <span class="material-symbols-outlined text-primary text-3xl"
-                            data-icon="psychology">psychology</span>
-                        <div>
-                            <h4 class="text-xl font-bold mb-2">Technical Experts</h4>
-                            <p class="text-on-surface-variant">Ingenieros Senior con experiencia en proyectos de impacto
-                                nacional y regional.</p>
-                        </div>
-                    </div>
+                    {
+                        items.map((item) => (
+                            <WhyUsItemList icon={item.icon} dataIcon={item.dataIcon} title={item.title} description={item.description} />
+                        ))
+                    }
                 </div>
             </div>
             <div class="relative group">

@@ -14,85 +14,42 @@ import ServiceCard from '../../shared/cards/ServiceCard.astro'
             <span class="text-xs font-mono text-outline uppercase tracking-[0.2em]">Engineering Excellence</span>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Card 1 -->
-            <div
-                class="glass-card p-8 rounded-full flex flex-col gap-6 group hover:border-primary/40 transition-colors">
-                <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <span class="material-symbols-outlined text-3xl" data-icon="custom_typography">data_object</span>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-2">Software a Medida</h3>
-                    <p class="text-on-surface-variant text-sm leading-relaxed">Arquitecturas robustas diseñadas desde
-                        cero para resolver problemas operativos complejos.</p>
-                </div>
-            </div>
-            <!-- Card 2 -->
-            <div
-                class="glass-card p-8 rounded-full flex flex-col gap-6 group hover:border-primary/40 transition-colors">
-                <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <span class="material-symbols-outlined text-3xl" data-icon="devices">devices</span>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-2">Web y Móvil</h3>
-                    <p class="text-on-surface-variant text-sm leading-relaxed">Experiencias digitales de alta gama con
-                        foco en rendimiento, UX y accesibilidad universal.</p>
-                </div>
-            </div>
-            <!-- Card 3 -->
-            <div
-                class="glass-card p-8 rounded-full flex flex-col gap-6 group hover:border-primary/40 transition-colors">
-                <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <span class="material-symbols-outlined text-3xl" data-icon="smart_toy">smart_toy</span>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-2">IA &amp; Automatización</h3>
-                    <p class="text-on-surface-variant text-sm leading-relaxed">Implementación de LLMs y modelos
-                        predictivos para optimizar la toma de decisiones.</p>
-                </div>
-            </div>
-            <!-- Card 4 -->
-            <div
-                class="glass-card p-8 rounded-full flex flex-col gap-6 group hover:border-primary/40 transition-colors">
-                <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <span class="material-symbols-outlined text-3xl" data-icon="troubleshoot">troubleshoot</span>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-2">Consultoría IT</h3>
-                    <p class="text-on-surface-variant text-sm leading-relaxed">Asesoría estratégica en transformación
-                        digital y modernización de infraestructuras legacy.</p>
-                </div>
-            </div>
-            <!-- Card 5 -->
-            <div
-                class="glass-card p-8 rounded-full flex flex-col gap-6 group hover:border-primary/40 transition-colors">
-                <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <span class="material-symbols-outlined text-3xl" data-icon="account_balance">account_balance</span>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-2">Sistemas Institucionales</h3>
-                    <p class="text-on-surface-variant text-sm leading-relaxed">Desarrollo de ERPs y sistemas de gestión
-                        de alto cumplimiento para el sector público y privado.</p>
-                </div>
-            </div>
-            <!-- Card 6 -->
-            <div
-                class="glass-card p-8 rounded-full flex flex-col gap-6 group hover:border-primary/40 transition-colors">
-                <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <span class="material-symbols-outlined text-3xl" data-icon="cloud_done">cloud_done</span>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-2">DevOps &amp; Cloud</h3>
-                    <p class="text-on-surface-variant text-sm leading-relaxed">Despliegue continuo, escalabilidad
-                        automática y seguridad nivel bancario en la nube.</p>
-                </div>
-            </div>
+            <ServiceCard
+                dataIcon="custom_typography"
+                icon="data_object"
+                title="Software a Medida"
+                description="Arquitecturas robustas diseñadas desde cero para resolver problemas operativos complejos."
+            />
+            <ServiceCard
+                dataIcon="devices"
+                icon="devices"
+                title="Web y Móvil"
+                description="Experiencias digitales de alta gama con foco en rendimiento, UX y accesibilidad universal."
+            />
+            <ServiceCard
+                dataIcon="smart_toy"
+                icon="smart_toy"
+                title="IA &amp; Automatización"
+                description="Implementación de LLMs y modelos predictivos para optimizar la toma de decisiones."
+            />
+            <ServiceCard
+                dataIcon="troubleshoot"
+                icon="troubleshoot"
+                title="Consultoría IT"
+                description="Asesoría estratégica en transformación digital y modernización de infraestructuras legacy."
+            />
+            <ServiceCard
+                dataIcon="account_balance"
+                icon="account_balance"
+                title="Sistemas Institucionales"
+                description="Desarrollo de ERPs y sistemas de gestión de alto cumplimiento para el sector público y privado."
+            />
+            <ServiceCard
+                dataIcon="cloud_done"
+                icon="cloud_done"
+                title="DevOps &amp; Cloud"
+                description="Despliegue continuo, escalabilidad automática y seguridad nivel bancario en la nube."
+            />
         </div>
     </section>
 
-<style>
-    .glass-card {
-        background: rgba(37, 37, 45, 0.6);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(188, 157, 255, 0.1);
-    }
-</style>

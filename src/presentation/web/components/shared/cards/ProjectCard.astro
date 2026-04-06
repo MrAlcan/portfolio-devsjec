@@ -1,0 +1,33 @@
+---
+interface Props {
+  imgUrl: string
+  alt: string
+  category: string
+  title: string
+  description: string
+}
+
+const { imgUrl, alt, category, title, description } = Astro.props
+---
+
+<div class="group cursor-pointer">
+  <div class="relative aspect-video rounded-xl overflow-hidden mb-6 bg-surface-container">
+    <img
+      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-60"
+      data-alt={ alt }
+      src={ imgUrl }
+    />
+    <div class="absolute inset-0 bg-linear-to-t from-background to-transparent"></div>
+    <div class="absolute bottom-4 left-4">
+      <span class="text-[10px] font-mono px-2 py-1 rounded bg-primary text-on-primary uppercase">
+        { category }
+      </span>
+    </div>
+  </div>
+  <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+    { title }
+  </h3>
+  <p class="text-on-surface-variant text-sm">
+    { description }
+  </p>
+</div>

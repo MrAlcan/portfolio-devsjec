@@ -1,58 +1,54 @@
+---
+import ProjectCard from '../../shared/cards/ProjectCard.astro'
+
+interface Project {
+  imgUrl: string
+  alt: string
+  category: string
+  title: string
+  description: string
+}
+
+const projects: Project[] = [
+  {
+    imgUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuAOVjt2_2vckXnIzdC6zI1U0BGJH44PEUV4z91NEy33-Mc2WhaeqDD3P3YptDSN6KsJICt2K7JRzRol5zQlGxo6mE48nHgQpKi1zzx9Ngcu2qqfcO7T_OC6m7UI5YvGiVcdPtpc8NB9N-bI7HTrUhwa0nbjKcKtScYhX8ChfIaT4E32nKV91wc7aIYx-F9Ic7sAZBTWcwtzLh8XzjBES5lFfzlgwIns9jFZkBzCw1CXfW2K9pJRi_ezFAIBp3FEL6Iz9iYaCsPzPE-3",
+    alt: "Dark abstract visualization of complex data charts and digital statistics in a professional dashboard interface",
+    category: "Gobierno Digital",
+    title: "Electoral Digital",
+    description: "Sistema robusto de procesamiento de datos en tiempo real para procesos electorales de alta criticidad."
+  },
+  {
+    imgUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuC0Fy5cSZfpnEy7X6UNM7B0-0HUeAORgYgUwzpM_FzxAwJg82OlxWIR_LQkyda-474iu1mz2Vupt9zOGQ3rRG_zHIbRUVnE5mOqYfFr2SJFxa-ysHaMTj4L1z4H92O534mgcGTKapSyLkK3CLYBgJWMYpiFqEVqRpOafjuwb3LtwbvbnsulD3c3fomoeCgaPHPIeRg4ha_eMIlnC1aOlnBTaqqIa0YM33X2FZbnocorm7bCM2BqiAj4AouuGy4l5kV3BQDiBiDlN46Q",
+    alt: "Clean minimalist interface showing complex multi-step digital forms with purple accent rings on a dark background",
+    category: "Educación",
+    title: "Formulario EMI",
+    description: "Digitalización integral de procesos académicos y administrativos para instituciones de educación superior."
+  },
+  {
+    imgUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuB3bo_9IDW7VIEgLOm2jcVfY5C1UPb0A04Jsv1nPxa5h8IHktL01BjXZdQBUSIZrwfWV5vyth91me4mLubDTwHLrUPrbkwEE-ehtJkZH4rPOiIM1oyB9rKKqyOJDMWH0os4eSlt3FMevsqzapJPGEvbPknHZSeogQlSLS5jb5zvtgavzx8SjtXdyzmMr0udJXkKQqBfGXYb6CwPrFyg_wcoRNr6nqMmPZXLqivI5Cls35szHhijS-cs1DQNZOM-Dn0sDgM2p6Tn0h7O",
+    alt: "Modern isometric web layout design for a global corporate brand with high-end glassmorphism elements",
+    category: "Finanzas",
+    title: "Sistema de Pagos",
+    description: "Plataforma de pagos en línea con integración de múltiples métodos de pago y seguridad de nivel bancario."
+  }
+]
+
+---
 <!-- Portfolio Section -->
-    <section class="py-32 px-8 max-w-7xl mx-auto" id="proyectos">
-        <div class="mb-16">
-            <h2 class="text-4xl font-headline font-extrabold tracking-tight mb-4">Proyectos Destacados</h2>
-            <div class="h-0.5 w-24 primary-gradient"></div>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Project 1 -->
-            <div class="group cursor-pointer">
-                <div class="relative aspect-video rounded-xl overflow-hidden mb-6 bg-surface-container">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-60"
-                        data-alt="Dark abstract visualization of complex data charts and digital statistics in a professional dashboard interface"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOVjt2_2vckXnIzdC6zI1U0BGJH44PEUV4z91NEy33-Mc2WhaeqDD3P3YptDSN6KsJICt2K7JRzRol5zQlGxo6mE48nHgQpKi1zzx9Ngcu2qqfcO7T_OC6m7UI5YvGiVcdPtpc8NB9N-bI7HTrUhwa0nbjKcKtScYhX8ChfIaT4E32nKV91wc7aIYx-F9Ic7sAZBTWcwtzLh8XzjBES5lFfzlgwIns9jFZkBzCw1CXfW2K9pJRi_ezFAIBp3FEL6Iz9iYaCsPzPE-3" />
-                    <div class="absolute inset-0 bg-linear-to-t from-background to-transparent"></div>
-                    <div class="absolute bottom-4 left-4">
-                        <span
-                            class="text-[10px] font-mono px-2 py-1 rounded bg-primary text-on-primary uppercase">Gobierno
-                            Digital</span>
-                    </div>
-                </div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Electoral Digital</h3>
-                <p class="text-on-surface-variant text-sm">Sistema robusto de procesamiento de datos en tiempo real para
-                    procesos electorales de alta criticidad.</p>
-            </div>
-            <!-- Project 2 -->
-            <div class="group cursor-pointer">
-                <div class="relative aspect-video rounded-xl overflow-hidden mb-6 bg-surface-container">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-60"
-                        data-alt="Clean minimalist interface showing complex multi-step digital forms with purple accent rings on a dark background"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0Fy5cSZfpnEy7X6UNM7B0-0HUeAORgYgUwzpM_FzxAwJg82OlxWIR_LQkyda-474iu1mz2Vupt9zOGQ3rRG_zHIbRUVnE5mOqYfFr2SJFxa-ysHaMTj4L1z4H92O534mgcGTKapSyLkK3CLYBgJWMYpiFqEVqRpOafjuwb3LtwbvbnsulD3c3fomoeCgaPHPIeRg4ha_eMIlnC1aOlnBTaqqIa0YM33X2FZbnocorm7bCM2BqiAj4AouuGy4l5kV3BQDiBiDlN46Q" />
-                    <div class="absolute inset-0 bg-linear-to-t from-background to-transparent"></div>
-                    <div class="absolute bottom-4 left-4">
-                        <span
-                            class="text-[10px] font-mono px-2 py-1 rounded bg-primary text-on-primary uppercase">Educación</span>
-                    </div>
-                </div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Formulario EMI</h3>
-                <p class="text-on-surface-variant text-sm">Digitalización integral de procesos académicos y
-                    administrativos para instituciones de educación superior.</p>
-            </div>
-            <!-- Project 3 -->
-            <div class="group cursor-pointer">
-                <div class="relative aspect-video rounded-xl overflow-hidden mb-6 bg-surface-container">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-60"
-                        data-alt="Modern isometric web layout design for a global corporate brand with high-end glassmorphism elements"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3bo_9IDW7VIEgLOm2jcVfY5C1UPb0A04Jsv1nPxa5h8IHktL01BjXZdQBUSIZrwfWV5vyth91me4mLubDTwHLrUPrbkwEE-ehtJkZH4rPOiIM1oyB9rKKqyOJDMWH0os4eSlt3FMevsqzapJPGEvbPknHZSeogQlSLS5jb5zvtgavzx8SjtXdyzmMr0udJXkKQqBfGXYb6CwPrFyg_wcoRNr6nqMmPZXLqivI5Cls35szHhijS-cs1DQNZOM-Dn0sDgM2p6Tn0h7O" />
-                    <div class="absolute inset-0 bg-linear-to-t from-background to-transparent"></div>
-                    <div class="absolute bottom-4 left-4">
-                        <span
-                            class="text-[10px] font-mono px-2 py-1 rounded bg-primary text-on-primary uppercase">Enterprise</span>
-                    </div>
-                </div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Web Corporativa V2</h3>
-                <p class="text-on-surface-variant text-sm">Plataforma escalable con CMS headless enfocada en la
-                    conversión y posicionamiento de marca global.</p>
-            </div>
-        </div>
-    </section>
+<section class="py-32 px-8 max-w-7xl mx-auto" id="proyectos">
+  <div class="mb-16">
+    <h2 class="text-4xl font-headline font-extrabold tracking-tight mb-4">Proyectos Destacados</h2>
+    <div class="h-0.5 w-24 primary-gradient"></div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    { projects.map( ( project ) => (
+      <ProjectCard
+        imgUrl={ project.imgUrl }
+        alt={ project.alt }
+        category={ project.category }
+        title={ project.title }
+        description={ project.description }
+      />
+    ) ) }
+  </div>
+</section>
