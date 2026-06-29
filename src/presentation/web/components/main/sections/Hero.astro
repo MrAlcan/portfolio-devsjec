@@ -1,45 +1,38 @@
 <!-- Hero Section -->
-    <section class="relative min-h-screen pt-32 pb-20 overflow-hidden flex items-center justify-center hero-gradient">
+    <section class="relative min-h-screen pt-32 pb-20 overflow-hidden flex items-center justify-center">
+        <!-- Grid pattern -->
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,var(--color-outline-variant)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-outline-variant)_1px,transparent_1px)] bg-[size:64px_64px] opacity-20 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,black,transparent)]" aria-hidden="true"></div>
         <!-- Floating Shapes -->
-        <div class="absolute top-20 left-10 w-64 h-64 bg-primary/10 blur-[100px] rounded-full"></div>
-        <div class="absolute bottom-20 right-10 w-96 h-96 bg-secondary/10 blur-[120px] rounded-full"></div>
+        <div class="absolute top-20 left-10 w-64 h-64 bg-primary/15 blur-[100px] rounded-full" aria-hidden="true"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-secondary/15 blur-[120px] rounded-full" aria-hidden="true"></div>
         <div class="max-w-7xl mx-auto px-8 relative z-10 text-center">
             <div
-                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container border border-outline-variant/30 text-xs font-mono mb-8">
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container border border-outline-variant/40 text-xs font-mono mb-8">
                 <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
                 <span class="text-on-surface-variant">DISPONIBLE PARA NUEVOS PROYECTOS</span>
             </div>
             <h1
-                class="text-5xl md:text-8xl font-headline font-extrabold tracking-tighter text-gradient mb-6 leading-tight">
+                class="text-5xl md:text-8xl font-headline font-extrabold tracking-tighter bg-linear-to-br from-primary via-secondary to-on-background bg-clip-text text-transparent mb-6 leading-tight">
                 Construimos el software que <br /> transforma tu negocio
             </h1>
             <p class="max-w-2xl mx-auto text-lg md:text-xl text-on-surface-variant mb-12 font-light">
                 Consultoría técnica de alto nivel especializada en arquitectura escalable, IA y desarrollo de sistemas
                 críticos.
-                <span class="block mt-2 text-primary/80 font-mono text-sm">Bolivia &amp; Alcance Regional</span>
+                <span class="block mt-2 text-primary font-mono text-sm">Bolivia &amp; Alcance Regional</span>
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button
-                    class="w-full sm:w-auto primary-gradient text-on-primary-container px-8 py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
+                <a
+                    href="/#contacto"
+                    class="w-full sm:w-auto primary-gradient text-on-primary px-8 py-4 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 hover:-translate-y-0.5 transition-all duration-200 active:scale-95 group"
                     aria-label="Iniciar un nuevo proyecto con DEVSJEC">
-                    Empezar un proyecto <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-                </button>
-                <button
-                    class="w-full sm:w-auto border border-outline-variant/40 bg-surface-container/20 backdrop-blur px-8 py-4 rounded-xl font-bold text-on-surface hover:bg-surface-container-high transition-colors"
+                    Empezar un proyecto <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform duration-200" aria-hidden="true">arrow_forward</span>
+                </a>
+                <a
+                    href="/#proyectos"
+                    class="w-full sm:w-auto border border-outline-variant/60 bg-surface-container/40 backdrop-blur px-8 py-4 rounded-xl font-bold text-on-surface flex items-center justify-center hover:bg-surface-container-high hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
                     aria-label="Ver portafolio de proyectos">
                     Ver Portafolio
-                </button>
+                </a>
             </div>
         </div>
     </section>
-
-<style>
-    .hero-gradient {
-        background: radial-gradient(circle at 50% 50%, rgba(108, 63, 197, 0.15) 0%, transparent 70%);
-    }
-    .text-gradient {
-        background: linear-gradient(135deg, #bc9dff 0%, #ffffff 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-</style>

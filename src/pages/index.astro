@@ -13,22 +13,28 @@ import Contact from '../presentation/web/components/main/sections/Contact.astro'
 import Footer from '../presentation/web/components/shared/Footer.astro'
 
 export const prerender = true
-
 ---
 
-<MainLayout>
+<MainLayout useHomeGraph={true}>
+  <a
+    href="#main"
+    class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-60 focus:px-4 focus:py-2 focus:rounded-lg focus:bg-primary focus:text-on-primary focus:font-bold"
+  >
+    Saltar al contenido
+  </a>
   <div class="bg-background text-on-background font-body selection:bg-primary/30 selection:text-primary">
     <NavBar />
-    <Hero />
-    <StatsBar />
-    <Services />
-    <WhyUs />
-    <TechStack />
-    <Portfolio />
-    <Team />
-    <Process />
-    <Contact />
+    <main id="main" tabindex="-1">
+      <Hero />
+      <StatsBar />
+      <Services />
+      <WhyUs />
+      <TechStack />
+      <Portfolio />
+      <Team />
+      <Process />
+      <Contact />
+    </main>
     <Footer />
-
   </div>
 </MainLayout>

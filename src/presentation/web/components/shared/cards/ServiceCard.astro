@@ -8,25 +8,16 @@ interface Props {
 }
 
 let { dataIcon, icon, title, description }: Props = Astro.props
-
-//TODO: Hover no funciona
 ---
 
-<div class="glass-card p-8 rounded-full flex flex-col gap-6 group hover:border-primary/40 transition-colors">
-  <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
+<div class="bg-surface-container/60 backdrop-blur-xl border border-primary/10 p-8 rounded-full flex flex-col gap-6 group hover:border-primary/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300">
+  <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:scale-110 transition-transform duration-300">
     <span class="material-symbols-outlined text-3xl" data-icon={dataIcon}>{icon}</span>
   </div>
   <div>
-    <h3 class="text-xl font-bold mb-2">{title}</h3>
+    <h3 class="text-xl font-bold mb-2 text-on-surface">{title}</h3>
     <p class="text-on-surface-variant text-sm leading-relaxed">
       {description}
     </p>
   </div>
 </div>
-<style>
-    .glass-card {
-        background: rgba(37, 37, 45, 0.6);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(188, 157, 255, 0.1);
-    }
-</style>

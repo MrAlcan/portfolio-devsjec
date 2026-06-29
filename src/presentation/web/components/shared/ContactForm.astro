@@ -1,63 +1,140 @@
 <div class="bg-surface-container border border-outline-variant/30 p-8 rounded-xl">
-    <form class="space-y-6" id="contact-form">
+    <form class="space-y-6" id="contact-form" novalidate>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="space-y-2">
-                <label class="text-xs font-mono text-outline uppercase">Nombre Completo</label>
+                <label for="contact-fullName" class="text-xs font-mono text-outline uppercase">Nombre Completo</label>
                 <input
+                    id="contact-fullName"
                     name="fullName"
-                    class="w-full bg-surface-container-low border-0 focus:ring-2 focus:ring-primary rounded-xl p-4 text-on-surface"
-                    placeholder="Tu nombre" type="text" />
+                    class="w-full bg-surface-container-low border border-outline-variant/40 focus:border-primary focus:ring-2 focus:ring-primary/30 outline-none rounded-xl p-4 text-on-surface placeholder:text-outline transition-all duration-200"
+                    placeholder="Tu nombre"
+                    type="text"
+                    autocomplete="name"
+                    required
+                    aria-required="true"
+                    minlength="2"
+                    maxlength="120"
+                />
             </div>
             <div class="space-y-2">
-                <label class="text-xs font-mono text-outline uppercase">Empresa</label>
+                <label for="contact-company" class="text-xs font-mono text-outline uppercase">Empresa</label>
                 <input
+                    id="contact-company"
                     name="company"
-                    class="w-full bg-surface-container-low border-0 focus:ring-2 focus:ring-primary rounded-xl p-4 text-on-surface"
-                    placeholder="Tu Empresa" type="text" />
+                    class="w-full bg-surface-container-low border border-outline-variant/40 focus:border-primary focus:ring-2 focus:ring-primary/30 outline-none rounded-xl p-4 text-on-surface placeholder:text-outline transition-all duration-200"
+                    placeholder="Tu Empresa"
+                    type="text"
+                    autocomplete="organization"
+                    maxlength="120"
+                />
             </div>
         </div>
         <div class="space-y-2">
-            <label class="text-xs font-mono text-outline uppercase">Email de contacto</label>
+            <label for="contact-email" class="text-xs font-mono text-outline uppercase">Email de contacto</label>
             <input
+                id="contact-email"
                 name="email"
-                class="w-full bg-surface-container-low border-0 focus:ring-2 focus:ring-primary rounded-xl p-4 text-on-surface"
-                placeholder="person@ejemplo.com" type="email" />
+                class="w-full bg-surface-container-low border border-outline-variant/40 focus:border-primary focus:ring-2 focus:ring-primary/30 outline-none rounded-xl p-4 text-on-surface placeholder:text-outline transition-all duration-200"
+                placeholder="persona@ejemplo.com"
+                type="email"
+                autocomplete="email"
+                required
+                aria-required="true"
+                inputmode="email"
+                maxlength="254"
+            />
         </div>
         <div class="space-y-2">
-            <label class="text-xs font-mono text-outline uppercase">Tu Mensaje</label>
+            <label for="contact-message" class="text-xs font-mono text-outline uppercase">Tu Mensaje</label>
             <textarea
+                id="contact-message"
                 name="message"
-                class="w-full bg-surface-container-low border-0 focus:ring-2 focus:ring-primary rounded-xl p-4 text-on-surface"
-                placeholder="Cuéntanos sobre tu proyecto..." rows="4"></textarea>
+                class="w-full bg-surface-container-low border border-outline-variant/40 focus:border-primary focus:ring-2 focus:ring-primary/30 outline-none rounded-xl p-4 text-on-surface placeholder:text-outline transition-all duration-200"
+                placeholder="Cuéntanos sobre tu proyecto..."
+                rows="4"
+                required
+                aria-required="true"
+                minlength="10"
+                maxlength="2000"
+            ></textarea>
+        </div>
+        <!-- Honeypot anti-spam: campo invisible que los bots rellenan -->
+        <div class="absolute -left-[9999px]" aria-hidden="true">
+            <label for="contact-website">No rellenes este campo</label>
+            <input id="contact-website" name="website" type="text" tabindex="-1" autocomplete="off" />
         </div>
         <button
-            class="w-full primary-gradient text-on-primary-container font-bold py-4 rounded-xl hover:opacity-90 transition-opacity">
+            type="submit"
+            class="w-full primary-gradient text-on-primary font-bold py-4 rounded-xl shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 hover:-translate-y-0.5 transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none disabled:translate-y-0"
+            id="contact-submit">
             Enviar Mensaje
         </button>
+        <p
+            id="contact-status"
+            role="status"
+            aria-live="polite"
+            class="text-sm text-center text-on-surface-variant min-h-5"
+        ></p>
     </form>
 </div>
 
 <script>
     import { actions } from 'astro:actions'
-    const form = document.querySelector('#contact-form');
+    const form = document.querySelector<HTMLFormElement>('#contact-form');
+    const status = document.querySelector<HTMLParagraphElement>('#contact-status');
+    const submitBtn = document.querySelector<HTMLButtonElement>('#contact-submit');
 
-    if (form) {
+    if (form && status && submitBtn) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const fullNameInput = form.querySelector('input[name="fullName"]') as HTMLInputElement;
-            const companyInput = form.querySelector('input[name="company"]') as HTMLInputElement;
-            const emailInput = form.querySelector('input[name="email"]') as HTMLInputElement;
-            const messageInput = form.querySelector('textarea[name="message"]') as HTMLTextAreaElement;
+            const honeypot = (form.querySelector('input[name="website"]') as HTMLInputElement | null)?.value;
+            if (honeypot) {
+                // Bot detectado: simulamos éxito sin hacer nada.
+                status.textContent = '¡Mensaje enviado! Te contactaremos pronto.';
+                status.className = 'text-sm text-center text-primary min-h-5';
+                form.reset();
+                return;
+            }
 
-            const formDataJSON = {
-                name: fullNameInput.value || '',
-                company: companyInput.value || '',
-                email: emailInput.value || '',
-                message: messageInput.value || ''
-            };
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
 
-            const result = await actions.sendEmail(formDataJSON);
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando…';
+            status.textContent = '';
+            status.className = 'text-sm text-center text-on-surface-variant min-h-5';
+
+            const fullName = (form.querySelector('input[name="fullName"]') as HTMLInputElement).value.trim();
+            const company = (form.querySelector('input[name="company"]') as HTMLInputElement).value.trim();
+            const email = (form.querySelector('input[name="email"]') as HTMLInputElement).value.trim();
+            const message = (form.querySelector('textarea[name="message"]') as HTMLTextAreaElement).value.trim();
+
+            try {
+                const result = await actions.sendEmail({
+                    name: fullName,
+                    company,
+                    email,
+                    message
+                });
+
+                if (result.error) {
+                    status.textContent = 'Hubo un problema al enviar el mensaje. Intenta de nuevo o escribe directamente al email del footer.';
+                    status.className = 'text-sm text-center text-error min-h-5';
+                } else {
+                    status.textContent = '¡Mensaje enviado! Te contactaremos pronto.';
+                    status.className = 'text-sm text-center text-primary min-h-5';
+                    form.reset();
+                }
+            } catch {
+                status.textContent = 'Error de red. Verifica tu conexión y vuelve a intentar.';
+                status.className = 'text-sm text-center text-error min-h-5';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Enviar Mensaje';
+            }
         });
     }
 </script>

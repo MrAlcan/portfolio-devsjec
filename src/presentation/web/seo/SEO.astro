@@ -1,0 +1,96 @@
+---
+import { PUBLIC_ENVIRONMENTS } from '../../../infrastructure/config/public-enviroments'
+import { buildHomeGraph, buildGraph } from './structuredData'
+
+export interface Props {
+  title?: string
+  description?: string
+  keywords?: string
+  ogImage?: string
+  ogType?: 'website' | 'article' | 'profile'
+  canonicalUrl?: string
+  author?: string
+  twitterHandle?: string
+  noindex?: boolean
+  extraSchemas?: object[]
+  publishedTime?: string
+  modifiedTime?: string
+  useHomeGraph?: boolean
+}
+
+const {
+  title = 'DEVSJEC SRL — Desarrollo de Software a Medida en La Paz, Bolivia',
+  description = 'Consultora de software en La Paz: desarrollo a medida, IA y automatización, sistemas web y móviles, DevOps y cloud. Proyectos para empresas e instituciones bolivianas.',
+  keywords = 'desarrollo de software Bolivia, consultora de software La Paz, agencia de desarrollo a medida, inteligencia artificial Bolivia, sistemas web La Paz, DevOps Bolivia, consultoría IT, ERP Bolivia, modernización legacy, arquitectura escalable, Astro, Go, Node.js, React',
+  ogImage = '/og-image.png',
+  ogType = 'website',
+  author = 'DEVSJEC SRL',
+  twitterHandle = '@devsjec',
+  noindex = false,
+  extraSchemas = [],
+  publishedTime,
+  modifiedTime,
+  useHomeGraph = false
+} = Astro.props as Props
+
+const siteUrl = (Astro.site ?? new URL('https://devsjec.com')).href
+const canonicalHref = Astro.props.canonicalUrl ?? new URL(Astro.url.pathname, siteUrl).href
+const ogImageHref = new URL(ogImage, siteUrl).href
+
+const robotsContent = noindex
+  ? 'noindex, nofollow'
+  : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'
+
+const graph = useHomeGraph
+  ? buildHomeGraph(siteUrl)
+  : buildGraph(siteUrl, extraSchemas)
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+<meta name="author" content={author} />
+<meta name="robots" content={robotsContent} />
+<meta name="generator" content={Astro.generator} />
+
+<link rel="canonical" href={canonicalHref} />
+
+{PUBLIC_ENVIRONMENTS.GSC_VERIFICATION && (
+  <meta name="google-site-verification" content={PUBLIC_ENVIRONMENTS.GSC_VERIFICATION} />
+)}
+{PUBLIC_ENVIRONMENTS.BING_VERIFICATION && (
+  <meta name="msvalidate.01" content={PUBLIC_ENVIRONMENTS.BING_VERIFICATION} />
+)}
+
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonicalHref} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImageHref} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={`${title} — DEVSJEC SRL`} />
+<meta property="og:site_name" content="DEVSJEC SRL" />
+<meta property="og:locale" content="es_BO" />
+{ogType === 'article' && publishedTime && (
+  <meta property="article:published_time" content={publishedTime} />
+)}
+{ogType === 'article' && modifiedTime && (
+  <meta property="article:modified_time" content={modifiedTime} />
+)}
+{ogType === 'article' && (
+  <meta property="article:author" content={author} />
+)}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalHref} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageHref} />
+<meta name="twitter:image:alt" content={`${title} — DEVSJEC SRL`} />
+<meta name="twitter:creator" content={twitterHandle} />
+<meta name="twitter:site" content={twitterHandle} />
+
+<link rel="alternate" type="application/rss+xml" title="Blog DEVSJEC SRL" href="/rss.xml" />
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(graph)} />

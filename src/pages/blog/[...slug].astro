@@ -1,0 +1,151 @@
+---
+import { getCollection, render } from 'astro:content'
+import MainLayout from '../../presentation/web/layouts/MainLayout.astro'
+import NavBar from '../../presentation/web/components/shared/NavBar.astro'
+import Footer from '../../presentation/web/components/shared/Footer.astro'
+import { buildBreadcrumbSchema } from '../../presentation/web/seo/structuredData'
+
+export const prerender = true
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft)
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post }
+  }))
+}
+
+const { post } = Astro.props
+const { Content } = await render(post)
+
+const siteUrl = (Astro.site ?? new URL('https://devsjec.com')).href
+const postUrl = `${siteUrl}blog/${post.id}`
+
+const breadcrumb = buildBreadcrumbSchema(siteUrl, [
+  { name: 'Inicio', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: post.data.title, url: `/blog/${post.id}` }
+])
+
+const articleSchema = {
+  '@type': 'BlogPosting',
+  '@id': `${postUrl}#article`,
+  headline: post.data.title,
+  description: post.data.description,
+  url: postUrl,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  author: { '@type': 'Person', name: post.data.author },
+  publisher: { '@id': `${siteUrl}#organization` },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
+  inLanguage: 'es-BO',
+  keywords: post.data.tags.join(', ')
+}
+---
+
+<MainLayout
+  title={`${post.data.title} | Blog DEVSJEC SRL`}
+  description={post.data.description}
+  ogType="article"
+  publishedTime={post.data.pubDate.toISOString()}
+  modifiedTime={post.data.updatedDate?.toISOString()}
+  author={post.data.author}
+  canonicalUrl={postUrl}
+  extraSchemas={[articleSchema, breadcrumb]}
+>
+  <div class="bg-background text-on-background font-body min-h-screen flex flex-col">
+    <NavBar />
+    <main id="main" tabindex="-1" class="flex-1 max-w-3xl mx-auto px-8 py-32">
+      <nav aria-label="Migas de pan" class="text-xs font-mono uppercase text-outline mb-6 flex gap-2">
+        <a href="/" class="hover:text-primary transition-colors">Inicio</a>
+        <span aria-hidden="true">›</span>
+        <a href="/blog" class="hover:text-primary transition-colors">Blog</a>
+      </nav>
+
+      <article>
+        <header class="mb-12">
+          <div class="flex items-center gap-3 mb-4 text-xs font-mono uppercase text-outline">
+            <time datetime={post.data.pubDate.toISOString()}>
+              {post.data.pubDate.toLocaleDateString('es-BO', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </time>
+            {post.data.tags.length > 0 && (
+              <>
+                <span aria-hidden="true">·</span>
+                <span>{post.data.tags.join(' · ')}</span>
+              </>
+            )}
+          </div>
+          <h1 class="text-4xl md:text-5xl font-headline font-extrabold tracking-tighter mb-6 leading-tight">
+            {post.data.title}
+          </h1>
+          <p class="text-lg text-on-surface-variant">{post.data.description}</p>
+          <p class="mt-4 text-sm text-outline">Por {post.data.author}</p>
+        </header>
+
+        <div class="prose-content text-on-surface-variant leading-relaxed space-y-4">
+          <Content />
+        </div>
+      </article>
+
+      <footer class="mt-20 pt-12 border-t border-outline-variant/20">
+        <a
+          href="/#contacto"
+          class="primary-gradient text-on-primary px-8 py-4 rounded-xl font-bold inline-flex items-center justify-center gap-2 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 hover:-translate-y-0.5 transition-all duration-200 active:scale-95">
+          ¿Quieres conversar sobre tu proyecto?
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+        </a>
+      </footer>
+    </main>
+    <Footer />
+  </div>
+</MainLayout>
+
+<style is:global>
+  .prose-content h2 {
+    font-size: 1.875rem;
+    font-weight: 800;
+    color: var(--color-on-surface);
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.025em;
+  }
+  .prose-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-on-surface);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .prose-content p { margin-bottom: 1rem; }
+  .prose-content ul, .prose-content ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .prose-content ul { list-style: disc; }
+  .prose-content ol { list-style: decimal; }
+  .prose-content li { margin-bottom: 0.5rem; }
+  .prose-content a { color: var(--color-primary); text-decoration: underline; }
+  .prose-content a:hover { opacity: 0.8; }
+  .prose-content code {
+    background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+    color: var(--color-primary);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875em;
+  }
+  .prose-content pre {
+    background: var(--color-surface-container);
+    border: 1px solid var(--color-outline-variant);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+  }
+  .prose-content pre code { background: transparent; color: inherit; padding: 0; }
+  .prose-content blockquote {
+    border-left: 3px solid var(--color-primary);
+    padding-left: 1rem;
+    color: var(--color-on-surface-variant);
+    font-style: italic;
+    margin: 1.5rem 0;
+  }
+  .prose-content strong { color: var(--color-on-surface); font-weight: 700; }
+</style>

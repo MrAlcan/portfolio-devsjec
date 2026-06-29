@@ -1,34 +1,76 @@
 ---
 import { PUBLIC_ENVIRONMENTS } from '../../../../infrastructure/config/public-enviroments'
+import ThemeToggle from './ThemeToggle.astro'
+
+const navLinks = [
+  { href: '/#servicios', section: 'servicios', label: 'Servicios', ariaLabel: 'Ir a la sección de servicios' },
+  { href: '/#nosotros', section: 'nosotros', label: 'Nosotros', ariaLabel: 'Ir a la sección nosotros' },
+  { href: '/#equipo', section: 'equipo', label: 'Equipo', ariaLabel: 'Ir a la sección del equipo' },
+  { href: '/#proyectos', section: 'proyectos', label: 'Proyectos', ariaLabel: 'Ir a la sección de proyectos' },
+  { href: '/blog', section: 'blog', label: 'Blog', ariaLabel: 'Ir al blog' },
+  { href: '/#contacto', section: 'contacto', label: 'Contacto', ariaLabel: 'Ir a la sección de contacto' }
+]
+
+const isBlog = Astro.url.pathname.startsWith('/blog')
+
+const linkClass =
+  'relative pb-1 font-headline font-extrabold tracking-tight text-on-surface-variant hover:text-on-surface transition-colors duration-200 ' +
+  'after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:rounded-full after:bg-primary ' +
+  'after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100 ' +
+  'aria-[current=page]:text-primary aria-[current=page]:after:scale-x-100'
 ---
 
-<header class="fixed top-0 w-full z-50 bg-[#0e0e13]/60 backdrop-blur-xl border-b border-[#bc9dff]/10 shadow-[0_20px_40px_rgba(108,63,197,0.08)]">
+<header class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl border-b border-primary/10 shadow-lg shadow-primary/5">
   <nav class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto" role="navigation" aria-label="Navegación principal">
-    <div class="text-2xl font-black text-[#bc9dff] tracking-tighter font-headline" aria-label="Logo de la empresa">{ PUBLIC_ENVIRONMENTS.COMPANY_NAME }</div>
-    <div class="hidden md:flex items-center space-gap-8 gap-x-8">
-      <a class="text-[#bc9dff] border-b-2 border-[#bc9dff] pb-1 font-headline font-extrabold tracking-tight"
-        href="#servicios" aria-label="Ir a la sección de servicios">Servicios</a>
-      <a class="text-white/70 hover:text-white transition-colors font-headline font-extrabold tracking-tight"
-        href="#nosotros" aria-label="Ir a la sección nosotros">Nosotros</a>
-      <a class="text-white/70 hover:text-white transition-colors font-headline font-extrabold tracking-tight"
-        href="#equipo" aria-label="Ir a la sección del equipo">Equipo</a>
-      <a class="text-white/70 hover:text-white transition-colors font-headline font-extrabold tracking-tight"
-        href="#proyectos" aria-label="Ir a la sección de proyectos">Proyectos</a>
-      <a class="text-white/70 hover:text-white transition-colors font-headline font-extrabold tracking-tight"
-        href="#contacto" aria-label="Ir a la sección de contacto">Contacto</a>
+    <a href="/" class="text-2xl font-black text-primary tracking-tighter font-headline transition-opacity hover:opacity-80" aria-label="Inicio — DEVSJEC SRL">{ PUBLIC_ENVIRONMENTS.COMPANY_NAME }</a>
+    <div class="hidden md:flex items-center gap-x-8">
+      { navLinks.map((link) => (
+        <a
+          class={linkClass}
+          href={link.href}
+          data-nav-section={link.section}
+          aria-current={isBlog && link.section === 'blog' ? 'page' : undefined}
+          aria-label={link.ariaLabel}
+        >
+          {link.label}
+        </a>
+      )) }
     </div>
     <div class="flex items-center gap-4">
-      <!--button
-        class="hidden lg:flex items-center gap-2 text-white/70 hover:text-white transition-colors text-sm font-bold">
-        ES|EN
-      </!--button-->
-      <button class="material-symbols-outlined text-white/70 hover:text-[#bc9dff] transition-colors"
-        data-icon="dark_mode" aria-label="Alternar modo oscuro">dark_mode</button>
-      <button
-        class="bg-[#bc9dff] text-on-primary-container px-6 py-2.5 rounded-xl font-bold hover:scale-95 transition-transform active:scale-90"
+      <ThemeToggle />
+      <a
+        href="/#contacto"
+        class="bg-primary text-on-primary px-6 py-2.5 rounded-xl font-bold shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
         aria-label="Iniciar proyecto con nosotros">
         Trabajemos juntos
-      </button>
+      </a>
     </div>
   </nav>
 </header>
+
+<script>
+  const links = document.querySelectorAll<HTMLAnchorElement>('a[data-nav-section]')
+  const sections = Array.from(links)
+    .map((link) => document.getElementById(link.dataset.navSection ?? ''))
+    .filter((section): section is HTMLElement => section !== null)
+
+  if (sections.length > 0) {
+    const setActive = (id: string) => {
+      links.forEach((link) => {
+        if (link.dataset.navSection === id) link.setAttribute('aria-current', 'page')
+        else link.removeAttribute('aria-current')
+      })
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(entry.target.id)
+        }
+      },
+      { rootMargin: '-35% 0px -60% 0px' }
+    )
+
+    sections.forEach((section) => observer.observe(section))
+  }
+</script>

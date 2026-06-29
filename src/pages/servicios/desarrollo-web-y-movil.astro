@@ -1,0 +1,77 @@
+---
+import MainLayout from '../../presentation/web/layouts/MainLayout.astro'
+import ServiceLandingTemplate from '../../presentation/web/components/templates/ServiceLandingTemplate.astro'
+import { buildBreadcrumbSchema, buildServicesSchema } from '../../presentation/web/seo/structuredData'
+
+export const prerender = true
+
+const slug = 'desarrollo-web-y-movil'
+const siteUrl = (Astro.site ?? new URL('https://devsjec.com')).href
+const service = buildServicesSchema(siteUrl).find((s) => (s as any)['@id'].includes(slug))
+const breadcrumb = buildBreadcrumbSchema(siteUrl, [
+  { name: 'Inicio', url: '/' },
+  { name: 'Servicios', url: '/#servicios' },
+  { name: 'Desarrollo Web y Móvil', url: `/servicios/${slug}` }
+])
+
+const faqs = [
+  {
+    question: '¿Hacen sitios web simples (landing, brochure)?',
+    answer: 'Sí. Para sitios institucionales y landings de campaña usamos Astro, que entrega HTML puro con perfecto SEO y velocidad. Costos desde $1.500 USD para sitios completos.'
+  },
+  {
+    question: '¿Qué stack usan para apps móviles?',
+    answer: 'Para apps multiplataforma usamos React Native o Flutter; para casos donde se necesita máximo rendimiento (cámara, AR, hardware) hacemos nativo en Swift/Kotlin. Decidimos según el caso, no según la moda.'
+  },
+  {
+    question: '¿Optimizan para Core Web Vitals y SEO?',
+    answer: 'Sí. Todo sitio web que entregamos cumple con LCP < 2.5s, CLS < 0.1, INP < 200ms en mobile. Implementamos sitemap, structured data (JSON-LD), Open Graph, y configuración para Search Console.'
+  },
+  {
+    question: '¿Hacen e-commerce?',
+    answer: 'Sí. Plataformas a medida o integradas con motores como Medusa o Saleor. También podemos integrar con pasarelas de pago locales (Tigo Money, banks bolivianos via API).'
+  },
+  {
+    question: '¿Qué incluye el mantenimiento?',
+    answer: 'Ofrecemos planes mensuales de mantenimiento que incluyen monitoreo de uptime, parches de seguridad, actualizaciones de dependencias, y horas de soporte para cambios menores.'
+  }
+]
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer }
+  }))
+}
+---
+
+<MainLayout
+  title="Desarrollo Web y Móvil en La Paz, Bolivia | DEVSJEC SRL"
+  description="Sitios web, apps móviles y e-commerce para empresas bolivianas. Optimizados para Core Web Vitals, SEO y conversión. Astro, React Native, Flutter."
+  canonicalUrl={`${siteUrl}servicios/${slug}`}
+  extraSchemas={[service!, breadcrumb, faqSchema]}
+>
+  <ServiceLandingTemplate
+    eyebrow="Web y Móvil"
+    heading="Desarrollo Web y Móvil con Estándar Internacional"
+    intro="Sitios web rápidos, apps móviles confiables y experiencias accesibles. Cuidamos rendimiento, SEO y conversión desde el primer commit."
+    problem="Muchos sitios web bolivianos se construyen con plantillas genéricas pesadas que cargan en 8 segundos, fallan en mobile, y no aparecen en Google. En apps móviles, el debate React Native vs Nativo se resuelve mal cuando se elige por moda. El resultado: inversión perdida, usuarios frustrados, ranking SEO bajo."
+    approach={[
+      { icon: 'design_services', title: 'Diseño UX/UI', description: 'Wireframes y prototipos navegables antes de escribir código. Iteramos sobre Figma con el cliente.' },
+      { icon: 'web', title: 'Web performante', description: 'Astro para sitios estáticos (LCP < 1.5s típicamente), Next.js o React para apps web complejas. SEO técnico desde el día uno.' },
+      { icon: 'phone_iphone', title: 'Móvil multiplataforma', description: 'React Native, Flutter o nativo según el caso. Publicación en App Store y Google Play incluida.' },
+      { icon: 'speed', title: 'Performance y a11y', description: 'Cumplimos Core Web Vitals, WCAG 2.1 AA, y monitoreamos con Lighthouse CI en cada release.' }
+    ]}
+    technologies={['Astro', 'Next.js', 'React', 'Svelte', 'React Native', 'Flutter', 'Tailwind CSS', 'TypeScript', 'Vercel', 'Cloudflare']}
+    outcomes={[
+      'Tiempo de carga 5-10x más rápido que la versión anterior.',
+      'Mejor ranking en Google por mejor SEO técnico y CWV.',
+      'Tasa de conversión más alta (formularios, compras, registros).',
+      'Apps móviles con menor tamaño y mejor retención.',
+      'Sitios accesibles para personas con discapacidad (WCAG).'
+    ]}
+    faqs={faqs}
+  />
+</MainLayout>

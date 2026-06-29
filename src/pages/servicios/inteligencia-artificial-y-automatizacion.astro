@@ -1,0 +1,77 @@
+---
+import MainLayout from '../../presentation/web/layouts/MainLayout.astro'
+import ServiceLandingTemplate from '../../presentation/web/components/templates/ServiceLandingTemplate.astro'
+import { buildBreadcrumbSchema, buildServicesSchema } from '../../presentation/web/seo/structuredData'
+
+export const prerender = true
+
+const slug = 'inteligencia-artificial-y-automatizacion'
+const siteUrl = (Astro.site ?? new URL('https://devsjec.com')).href
+const service = buildServicesSchema(siteUrl).find((s) => (s as any)['@id'].includes(slug))
+const breadcrumb = buildBreadcrumbSchema(siteUrl, [
+  { name: 'Inicio', url: '/' },
+  { name: 'Servicios', url: '/#servicios' },
+  { name: 'IA y Automatización', url: `/servicios/${slug}` }
+])
+
+const faqs = [
+  {
+    question: '¿Qué tipo de proyectos de IA hacen?',
+    answer: 'Chatbots conversacionales con LLMs (atención al cliente, ventas), agentes que automatizan procesos internos, modelos predictivos a medida (riesgo, demanda, churn), procesamiento de documentos (OCR + extracción estructurada), y RAG sobre conocimiento de la empresa.'
+  },
+  {
+    question: '¿Hay que tener mucha data para empezar?',
+    answer: 'No siempre. Con LLMs modernos (Claude, GPT, Llama) muchos casos se resuelven con prompt engineering + RAG sin entrenar modelos propios. Para predicciones a medida sí se requiere data histórica limpia.'
+  },
+  {
+    question: '¿Es seguro pasar mis datos a un LLM?',
+    answer: 'Diseñamos arquitecturas que minimizan exposición: filtrado de PII antes del prompt, uso de proveedores con cláusulas de no-entrenamiento, o despliegue de modelos open-source autohospedados (Llama, Mistral) cuando la data es muy sensible.'
+  },
+  {
+    question: '¿Cuánto cuesta operar un sistema con IA?',
+    answer: 'El costo principal es el consumo de tokens del modelo. Un chatbot moderno bien diseñado cuesta entre $50 y $500 USD/mes en API según volumen. Optimizamos prompts y usamos caching para mantenerlo bajo.'
+  },
+  {
+    question: '¿Qué resultados esperar a corto plazo?',
+    answer: 'Proyectos piloto con resultados medibles en 4-8 semanas: tiempo de atención reducido, costos operativos menores, mayor capacidad de procesamiento sin contratar.'
+  }
+]
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer }
+  }))
+}
+---
+
+<MainLayout
+  title="IA y Automatización para Empresas en Bolivia | DEVSJEC SRL"
+  description="Implementamos LLMs, chatbots, agentes de IA y automatización de procesos para empresas bolivianas. Pilotos en 4-8 semanas, ROI medible."
+  canonicalUrl={`${siteUrl}servicios/${slug}`}
+  extraSchemas={[service!, breadcrumb, faqSchema]}
+>
+  <ServiceLandingTemplate
+    eyebrow="Inteligencia Artificial"
+    heading="IA y Automatización para tu Empresa"
+    intro="Aplicamos LLMs, agentes y modelos predictivos para automatizar tareas repetitivas y desbloquear capacidades nuevas. No hype: casos de uso con ROI claro."
+    problem="La IA generativa cambió el panorama: tareas que antes requerían meses de ML ahora se resuelven con prompts bien diseñados. Pero la mayoría de empresas no saben por dónde empezar, qué se puede y qué no, ni cómo medir si funciona. El resultado son proyectos piloto eternos sin impacto real, o automatizaciones frágiles que se rompen en producción."
+    approach={[
+      { icon: 'search', title: 'Caso de uso', description: 'Identificamos juntos las 2-3 tareas con mayor potencial de automatización por volumen, costo o cuello de botella.' },
+      { icon: 'science', title: 'Prototipo', description: 'En 2-4 semanas montamos un MVP funcional con LLM + RAG sobre tu conocimiento. Mide resultados reales antes de escalar.' },
+      { icon: 'tune', title: 'Iteración', description: 'Refinamos prompts, evaluación, guardrails y costos. Definimos métricas (precisión, latencia, costo por tarea).' },
+      { icon: 'integration_instructions', title: 'Integración', description: 'Conectamos con tus sistemas internos (CRM, ERP, base de datos) para que la IA actúe, no solo conteste.' }
+    ]}
+    technologies={['Claude API', 'OpenAI API', 'Llama 3', 'Python', 'LangChain', 'pgvector', 'Pinecone', 'n8n', 'TypeScript']}
+    outcomes={[
+      'Atención al cliente 24/7 con costos marginales muy bajos.',
+      'Procesamiento de documentos (facturas, contratos) sin captura manual.',
+      'Soporte interno para empleados con búsqueda en knowledge base.',
+      'Predicción de churn, riesgo crediticio o demanda con modelos a medida.',
+      'Automatización de flujos administrativos repetitivos.'
+    ]}
+    faqs={faqs}
+  />
+</MainLayout>

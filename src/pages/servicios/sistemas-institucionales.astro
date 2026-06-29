@@ -1,0 +1,77 @@
+---
+import MainLayout from '../../presentation/web/layouts/MainLayout.astro'
+import ServiceLandingTemplate from '../../presentation/web/components/templates/ServiceLandingTemplate.astro'
+import { buildBreadcrumbSchema, buildServicesSchema } from '../../presentation/web/seo/structuredData'
+
+export const prerender = true
+
+const slug = 'sistemas-institucionales'
+const siteUrl = (Astro.site ?? new URL('https://devsjec.com')).href
+const service = buildServicesSchema(siteUrl).find((s) => (s as any)['@id'].includes(slug))
+const breadcrumb = buildBreadcrumbSchema(siteUrl, [
+  { name: 'Inicio', url: '/' },
+  { name: 'Servicios', url: '/#servicios' },
+  { name: 'Sistemas Institucionales', url: `/servicios/${slug}` }
+])
+
+const faqs = [
+  {
+    question: '¿Han trabajado con instituciones del Estado?',
+    answer: 'Sí. Tenemos experiencia desarrollando sistemas para procesos electorales, gestión académica universitaria y plataformas de pago institucional. Conocemos los requerimientos de auditabilidad, trazabilidad y seguridad del sector público.'
+  },
+  {
+    question: '¿Cumplen con normativas locales (SIN, ASFI, ATT)?',
+    answer: 'Sí. Implementamos integraciones con facturación electrónica del SIN, cumplimos requisitos de ASFI para sistemas financieros, y conocemos requisitos de protección de datos vigentes en Bolivia.'
+  },
+  {
+    question: '¿Qué tipo de ERPs construyen?',
+    answer: 'A medida según necesidad: gestión de inventario, contabilidad simplificada, RRHH, ventas, control de producción. No revendemos productos cerrados; construimos sobre stacks abiertos para que el cliente sea dueño del sistema.'
+  },
+  {
+    question: '¿Cuánto tiempo toma implementar un ERP a medida?',
+    answer: 'Depende del alcance. Un módulo crítico (ej. facturación) puede estar en producción en 8-12 semanas. Una suite completa va de 6 a 18 meses, entregada por módulos para empezar a obtener valor pronto.'
+  },
+  {
+    question: '¿Migran data desde sistemas anteriores?',
+    answer: 'Sí. La migración de data legacy (Excel, FoxPro, sistemas heredados) es parte estándar del proyecto. Diseñamos scripts de ETL con validación y procesos de paralelo antes del cutover.'
+  }
+]
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer }
+  }))
+}
+---
+
+<MainLayout
+  title="Sistemas Institucionales y ERP a Medida en Bolivia | DEVSJEC SRL"
+  description="ERPs, sistemas de gestión y plataformas para sector público y privado en Bolivia. Cumplimiento SIN, ASFI, ATT. Auditabilidad y seguridad nivel institucional."
+  canonicalUrl={`${siteUrl}servicios/${slug}`}
+  extraSchemas={[service!, breadcrumb, faqSchema]}
+>
+  <ServiceLandingTemplate
+    eyebrow="Sistemas Institucionales"
+    heading="ERPs y Sistemas de Gestión para Instituciones"
+    intro="Sistemas críticos para entidades públicas, universidades, financieras y empresas medianas. Auditabilidad, cumplimiento normativo y operación 24/7."
+    problem="Las instituciones bolivianas con flujos críticos (electoral, financiero, académico, salud) no pueden depender de SaaS internacionales que no se integran con normativas locales ni resisten auditorías. Y los ERPs cerrados tipo SAP o Oracle son prohibitivos en costo y rigidez. La opción es construir sistemas a medida sobre stacks abiertos, modernos y auditables."
+    approach={[
+      { icon: 'gavel', title: 'Cumplimiento normativo', description: 'Identificamos desde el inicio los requisitos legales y normativos aplicables (SIN, ASFI, ATT, protección de datos).' },
+      { icon: 'verified_user', title: 'Auditabilidad', description: 'Trazas inmutables de toda operación crítica. Logs estructurados. Capacidad de auditoría externa por terceros.' },
+      { icon: 'security', title: 'Seguridad', description: 'Cifrado en reposo y tránsito, gestión de accesos por roles, autenticación multi-factor, protección contra OWASP Top 10.' },
+      { icon: 'sync_alt', title: 'Integraciones', description: 'Facturación electrónica SIN, pasarelas de pago locales, bancos bolivianos, sistemas de gobierno.' }
+    ]}
+    technologies={['Go', 'PostgreSQL', 'Redis', 'Docker', 'Kubernetes', 'Kafka', 'OpenTelemetry', 'OAuth2/OIDC', 'Vault']}
+    outcomes={[
+      'Sistemas críticos con uptime > 99.9% y trazabilidad completa.',
+      'Cumplimiento de auditorías sin sobresaltos.',
+      'Reducción de costos vs. licencias de ERPs comerciales.',
+      'Capacidad de evolucionar el sistema sin esperar al proveedor.',
+      'Integración nativa con plataformas estatales bolivianas.'
+    ]}
+    faqs={faqs}
+  />
+</MainLayout>

@@ -1,0 +1,84 @@
+---
+import { getCollection } from 'astro:content'
+import MainLayout from '../../presentation/web/layouts/MainLayout.astro'
+import NavBar from '../../presentation/web/components/shared/NavBar.astro'
+import Footer from '../../presentation/web/components/shared/Footer.astro'
+import { buildBreadcrumbSchema } from '../../presentation/web/seo/structuredData'
+
+export const prerender = true
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+
+const siteUrl = (Astro.site ?? new URL('https://devsjec.com')).href
+const breadcrumb = buildBreadcrumbSchema(siteUrl, [
+  { name: 'Inicio', url: '/' },
+  { name: 'Blog', url: '/blog' }
+])
+
+const blogSchema = {
+  '@type': 'Blog',
+  '@id': `${siteUrl}blog#blog`,
+  name: 'Blog DEVSJEC SRL',
+  description: 'Artículos técnicos sobre desarrollo de software, IA, DevOps y arquitectura desde Bolivia.',
+  inLanguage: 'es-BO',
+  publisher: { '@id': `${siteUrl}#organization` },
+  blogPost: posts.map((p) => ({
+    '@type': 'BlogPosting',
+    headline: p.data.title,
+    url: `${siteUrl}blog/${p.id}`,
+    datePublished: p.data.pubDate.toISOString(),
+    author: { '@type': 'Person', name: p.data.author }
+  }))
+}
+---
+
+<MainLayout
+  title="Blog Técnico — Desarrollo de Software, IA y DevOps en Bolivia | DEVSJEC SRL"
+  description="Artículos técnicos sobre desarrollo de software, inteligencia artificial, DevOps y arquitectura desde La Paz, Bolivia. Casos reales, sin hype."
+  extraSchemas={[blogSchema, breadcrumb]}
+>
+  <div class="bg-background text-on-background font-body min-h-screen flex flex-col">
+    <NavBar />
+    <main id="main" tabindex="-1" class="flex-1 max-w-5xl mx-auto px-8 py-32">
+      <p class="text-xs font-mono uppercase text-primary tracking-[0.2em] mb-4">Blog</p>
+      <h1 class="text-5xl md:text-6xl font-headline font-extrabold tracking-tighter mb-6">Notas técnicas desde los Andes</h1>
+      <p class="text-lg text-on-surface-variant max-w-2xl mb-16">Decisiones de arquitectura, lecciones de proyectos reales, IA aplicada, DevOps y cloud. Sin hype.</p>
+
+      {posts.length === 0 ? (
+        <p class="text-on-surface-variant">Aún no hay artículos publicados. Vuelve pronto.</p>
+      ) : (
+        <ul class="space-y-12">
+          {posts.map((post) => (
+            <li>
+              <article class="group">
+                <a href={`/blog/${post.id}`} class="block">
+                  <div class="flex items-center gap-3 mb-3 text-xs font-mono uppercase text-outline">
+                    <time datetime={post.data.pubDate.toISOString()}>
+                      {post.data.pubDate.toLocaleDateString('es-BO', { year: 'numeric', month: 'long', day: 'numeric' })}
+                    </time>
+                    {post.data.tags.length > 0 && (
+                      <>
+                        <span aria-hidden="true">·</span>
+                        <span>{post.data.tags.join(' · ')}</span>
+                      </>
+                    )}
+                  </div>
+                  <h2 class="text-2xl md:text-3xl font-headline font-extrabold tracking-tight mb-3 group-hover:text-primary transition-colors">
+                    {post.data.title}
+                  </h2>
+                  <p class="text-on-surface-variant leading-relaxed mb-3">{post.data.description}</p>
+                  <span class="text-primary font-bold text-sm inline-flex items-center gap-1">
+                    Leer artículo
+                    <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
+                  </span>
+                </a>
+              </article>
+            </li>
+          ))}
+        </ul>
+      )}
+    </main>
+    <Footer />
+  </div>
+</MainLayout>

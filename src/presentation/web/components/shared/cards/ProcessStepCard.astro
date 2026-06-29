@@ -8,11 +8,11 @@ interface Props {
 const { number, title, description } = Astro.props
 ---
 
-<div class="bg-background p-6 rounded-xl border border-outline-variant/10 text-center relative">
-    <div class="w-12 h-12 primary-gradient rounded-full flex items-center justify-center mx-auto mb-6 text-on-primary-container font-black">
+<div class="group bg-background p-6 rounded-xl border border-outline-variant/20 text-center relative hover:border-primary/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300">
+    <div class="w-12 h-12 primary-gradient rounded-full flex items-center justify-center mx-auto mb-6 text-on-primary font-black ring-4 ring-background group-hover:scale-110 transition-transform duration-300">
         { number }
     </div>
-    <h5 class="text-lg font-bold mb-2">
+    <h5 class="text-lg font-bold mb-2 text-on-surface">
         { title }
     </h5>
     <p class="text-on-surface-variant text-sm">

@@ -1,0 +1,33 @@
+---
+interface Props {
+  class?: string
+}
+
+const { class: className = '' } = Astro.props
+---
+
+<button
+  type="button"
+  data-theme-toggle
+  class={`inline-flex items-center justify-center w-10 h-10 rounded-full text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-all duration-200 active:scale-90 cursor-pointer ${className}`}
+  aria-label="Alternar tema claro u oscuro"
+>
+  <span class="material-symbols-outlined dark:hidden!" data-icon="dark_mode" aria-hidden="true">dark_mode</span>
+  <span class="material-symbols-outlined hidden! dark:inline-block!" data-icon="light_mode" aria-hidden="true">light_mode</span>
+</button>
+
+<script>
+  const setTheme = (dark: boolean) => {
+    document.documentElement.classList.toggle('dark', dark)
+    document.documentElement.style.colorScheme = dark ? 'dark' : 'light'
+    try {
+      localStorage.setItem('theme', dark ? 'dark' : 'light')
+    } catch {}
+  }
+
+  document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+    button.addEventListener('click', () => {
+      setTheme(!document.documentElement.classList.contains('dark'))
+    })
+  })
+</script>

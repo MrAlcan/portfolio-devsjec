@@ -1,0 +1,77 @@
+---
+import MainLayout from '../../presentation/web/layouts/MainLayout.astro'
+import ServiceLandingTemplate from '../../presentation/web/components/templates/ServiceLandingTemplate.astro'
+import { buildBreadcrumbSchema, buildServicesSchema } from '../../presentation/web/seo/structuredData'
+
+export const prerender = true
+
+const slug = 'consultoria-it'
+const siteUrl = (Astro.site ?? new URL('https://devsjec.com')).href
+const service = buildServicesSchema(siteUrl).find((s) => (s as any)['@id'].includes(slug))
+const breadcrumb = buildBreadcrumbSchema(siteUrl, [
+  { name: 'Inicio', url: '/' },
+  { name: 'Servicios', url: '/#servicios' },
+  { name: 'Consultoría IT', url: `/servicios/${slug}` }
+])
+
+const faqs = [
+  {
+    question: '¿En qué se diferencia la consultoría de un proyecto de desarrollo?',
+    answer: 'En consultoría no escribimos código (al menos no como producto entregable). Te ayudamos a tomar decisiones técnicas y estratégicas: qué stack adoptar, cómo migrar un sistema legacy, cómo estructurar un equipo de TI, qué arquitectura cloud elegir, etc.'
+  },
+  {
+    question: '¿Cuánto duran las consultorías?',
+    answer: 'Desde sesiones puntuales de 4-8 horas para una decisión específica, hasta engagements de 1-3 meses para revisar arquitectura completa, due diligence técnico de adquisiciones, o roadmap de modernización.'
+  },
+  {
+    question: '¿Qué entregables se reciben?',
+    answer: 'Documentos accionables: assessment de la situación actual, recomendaciones priorizadas con costo/beneficio estimado, roadmap por fases, y bocetos de arquitectura propuesta.'
+  },
+  {
+    question: '¿Hacen due diligence técnico para inversión?',
+    answer: 'Sí. Para fondos o empresas que evalúan adquirir/invertir en una startup o empresa de tecnología, hacemos auditoría de código, arquitectura, prácticas de seguridad y deuda técnica.'
+  },
+  {
+    question: '¿Pueden ayudar con la transición de sistemas legacy?',
+    answer: 'Sí. Es uno de nuestros campos. Diseñamos estrategias de modernización por fases (strangler pattern, write-around, etc.) que minimizan riesgo y permiten al negocio seguir operando.'
+  }
+]
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer }
+  }))
+}
+---
+
+<MainLayout
+  title="Consultoría IT y Transformación Digital en Bolivia | DEVSJEC SRL"
+  description="Asesoría técnica para CIOs y líderes: arquitectura, modernización de legacy, due diligence, roadmap tecnológico. Consultoría IT en La Paz, Bolivia."
+  canonicalUrl={`${siteUrl}servicios/${slug}`}
+  extraSchemas={[service!, breadcrumb, faqSchema]}
+>
+  <ServiceLandingTemplate
+    eyebrow="Consultoría IT"
+    heading="Asesoría Técnica para Decisiones que Importan"
+    intro="Acompañamos a líderes técnicos y de negocio en decisiones complejas: arquitectura, modernización, contratación, due diligence. Criterio independiente y aterrizado a Bolivia."
+    problem="Cuando una empresa enfrenta una decisión técnica grande (migrar a cloud, reemplazar un ERP, contratar líder de tecnología, decidir hacer o comprar), el costo de equivocarse es enorme. Y los proveedores con interés en venderte algo no son los mejores asesores. La consultoría externa independiente cubre ese gap."
+    approach={[
+      { icon: 'fact_check', title: 'Diagnóstico', description: 'Entrevistas con stakeholders técnicos y de negocio, revisión de documentación, evaluación de sistemas actuales.' },
+      { icon: 'insights', title: 'Análisis', description: 'Comparativa de opciones con criterios objetivos: costo total de propiedad, riesgo, time-to-value, capacidades del equipo.' },
+      { icon: 'route', title: 'Roadmap', description: 'Plan por fases con quick wins iniciales y metas a medio plazo. Cronograma realista basado en capacidad real del equipo.' },
+      { icon: 'support_agent', title: 'Acompañamiento', description: 'Opcional: presencia recurrente como CTO fraccional para guiar la ejecución y resolver bloqueos técnicos.' }
+    ]}
+    technologies={['Cloud (AWS/Azure/GCP)', 'Kubernetes', 'Microservicios', 'Event-driven architecture', 'DDD', 'Observabilidad', 'SRE', 'Compliance']}
+    outcomes={[
+      'Decisiones técnicas tomadas con criterio independiente y data.',
+      'Roadmap de modernización por fases con riesgos identificados.',
+      'Reducción de costos cloud por arquitectura más eficiente.',
+      'Equipos técnicos mejor estructurados y con dirección clara.',
+      'Due diligence completa antes de invertir o adquirir.'
+    ]}
+    faqs={faqs}
+  />
+</MainLayout>

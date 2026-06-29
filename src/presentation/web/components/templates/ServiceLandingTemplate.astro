@@ -1,0 +1,159 @@
+---
+import NavBar from '../shared/NavBar.astro'
+import Footer from '../shared/Footer.astro'
+
+interface FAQItem {
+  question: string
+  answer: string
+}
+
+interface BulletItem {
+  icon?: string
+  title: string
+  description: string
+}
+
+interface Props {
+  eyebrow: string
+  heading: string
+  intro: string
+  problem: string
+  approach: BulletItem[]
+  technologies: string[]
+  outcomes: string[]
+  faqs: FAQItem[]
+  ctaText?: string
+}
+
+const {
+  eyebrow,
+  heading,
+  intro,
+  problem,
+  approach,
+  technologies,
+  outcomes,
+  faqs,
+  ctaText = 'Conversemos sobre tu proyecto'
+} = Astro.props as Props
+---
+
+<div class="bg-background text-on-background font-body min-h-screen flex flex-col">
+  <NavBar />
+  <main id="main" tabindex="-1" class="flex-1">
+    <!-- Hero -->
+    <section class="pt-40 pb-20 px-8 max-w-5xl mx-auto">
+      <nav aria-label="Migas de pan" class="text-xs font-mono uppercase text-outline mb-6 flex gap-2">
+        <a href="/" class="hover:text-primary transition-colors">Inicio</a>
+        <span aria-hidden="true">›</span>
+        <a href="/#servicios" class="hover:text-primary transition-colors">Servicios</a>
+        <span aria-hidden="true">›</span>
+        <span class="text-on-surface-variant">{ eyebrow }</span>
+      </nav>
+      <p class="text-xs font-mono uppercase text-primary tracking-[0.2em] mb-4">{ eyebrow }</p>
+      <h1 class="text-4xl md:text-6xl font-headline font-extrabold tracking-tighter mb-8 leading-tight">{ heading }</h1>
+      <p class="text-lg md:text-xl text-on-surface-variant max-w-3xl">{ intro }</p>
+      <div class="mt-12 flex flex-col sm:flex-row gap-4">
+        <a
+          href="/#contacto"
+          class="primary-gradient text-on-primary px-8 py-4 rounded-xl font-bold inline-flex items-center justify-center gap-2 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 hover:-translate-y-0.5 transition-all duration-200 active:scale-95">
+          { ctaText }
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+        </a>
+        <a
+          href="/#proyectos"
+          class="border border-outline-variant/40 bg-surface-container/20 backdrop-blur px-8 py-4 rounded-xl font-bold text-on-surface hover:bg-surface-container-high transition-colors inline-flex items-center justify-center">
+          Ver casos de éxito
+        </a>
+      </div>
+    </section>
+
+    <!-- Problem -->
+    <section class="py-20 px-8 max-w-5xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-headline font-extrabold tracking-tight mb-6">El problema que resolvemos</h2>
+      <div class="h-0.5 w-24 primary-gradient mb-8"></div>
+      <p class="text-on-surface-variant text-lg leading-relaxed">{ problem }</p>
+    </section>
+
+    <!-- Approach -->
+    <section class="py-20 px-8 bg-surface-container-low">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-headline font-extrabold tracking-tight mb-6">Nuestro enfoque</h2>
+        <div class="h-0.5 w-24 primary-gradient mb-12"></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          { approach.map((item, idx) => (
+            <article class="bg-surface-container/60 backdrop-blur-xl border border-primary/10 p-8 rounded-2xl hover:border-primary/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300">
+              <div class="flex items-start gap-4 mb-4">
+                <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold flex-shrink-0">
+                  <span class="material-symbols-outlined" aria-hidden="true">{ item.icon || 'check_circle' }</span>
+                </div>
+                <h3 class="text-xl font-bold mt-2">{ idx + 1 }. { item.title }</h3>
+              </div>
+              <p class="text-on-surface-variant leading-relaxed">{ item.description }</p>
+            </article>
+          )) }
+        </div>
+      </div>
+    </section>
+
+    <!-- Technologies -->
+    <section class="py-20 px-8 max-w-5xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-headline font-extrabold tracking-tight mb-6">Tecnologías que usamos</h2>
+      <div class="h-0.5 w-24 primary-gradient mb-8"></div>
+      <ul class="flex flex-wrap gap-3">
+        { technologies.map((tech) => (
+          <li class="px-4 py-2 rounded-full bg-surface-container border border-outline-variant/30 text-sm font-mono text-on-surface-variant">{ tech }</li>
+        )) }
+      </ul>
+    </section>
+
+    <!-- Outcomes -->
+    <section class="py-20 px-8 bg-surface-container-low">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-headline font-extrabold tracking-tight mb-6">Resultados típicos</h2>
+        <div class="h-0.5 w-24 primary-gradient mb-12"></div>
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          { outcomes.map((outcome) => (
+            <li class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-primary flex-shrink-0 mt-1" aria-hidden="true">trending_up</span>
+              <span class="text-on-surface-variant leading-relaxed">{ outcome }</span>
+            </li>
+          )) }
+        </ul>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 px-8 max-w-3xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-headline font-extrabold tracking-tight mb-6">Preguntas frecuentes</h2>
+      <div class="h-0.5 w-24 primary-gradient mb-12"></div>
+      <div class="space-y-4">
+        { faqs.map((faq) => (
+          <details class="group bg-surface-container border border-outline-variant/30 rounded-xl p-6 open:border-primary/40 transition-colors">
+            <summary class="cursor-pointer font-bold text-lg flex items-center justify-between gap-4">
+              <span>{ faq.question }</span>
+              <span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform" aria-hidden="true">expand_more</span>
+            </summary>
+            <p class="mt-4 text-on-surface-variant leading-relaxed">{ faq.answer }</p>
+          </details>
+        )) }
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-32 px-8 bg-surface-container-low">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-headline font-extrabold tracking-tight mb-6">¿Listo para empezar?</h2>
+        <p class="text-on-surface-variant text-lg mb-12">Una conversación inicial sin compromiso es el mejor primer paso.</p>
+        <a
+          href="/#contacto"
+          class="primary-gradient text-on-primary px-8 py-4 rounded-xl font-bold inline-flex items-center justify-center gap-2 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 hover:-translate-y-0.5 transition-all duration-200 active:scale-95">
+          { ctaText }
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</div>
+

@@ -1,0 +1,58 @@
+---
+import MainLayout from '../../presentation/web/layouts/MainLayout.astro'
+import NavBar from '../../presentation/web/components/shared/NavBar.astro'
+import Footer from '../../presentation/web/components/shared/Footer.astro'
+import { PUBLIC_ENVIRONMENTS } from '../../infrastructure/config/public-enviroments'
+import { buildBreadcrumbSchema } from '../../presentation/web/seo/structuredData'
+
+export const prerender = true
+
+const siteUrl = (Astro.site ?? new URL('https://devsjec.com')).href
+const breadcrumb = buildBreadcrumbSchema(siteUrl, [
+  { name: 'Inicio', url: '/' },
+  { name: 'Cookies', url: '/legal/cookies' }
+])
+---
+
+<MainLayout
+  title="Política de Cookies — DEVSJEC SRL"
+  description="Política de cookies de devsjec.com: usamos analítica sin cookies (Umami). El sitio no instala cookies de terceros con fines publicitarios."
+  extraSchemas={[breadcrumb]}
+>
+  <div class="bg-background text-on-background font-body min-h-screen flex flex-col">
+    <NavBar />
+    <main id="main" tabindex="-1" class="flex-1 max-w-3xl mx-auto px-8 py-32">
+      <p class="text-xs font-mono uppercase text-outline tracking-[0.2em] mb-4">Legal</p>
+      <h1 class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight mb-8">Política de Cookies</h1>
+      <p class="text-on-surface-variant mb-8">Última actualización: { new Date().toISOString().slice(0, 10) }</p>
+
+      <div class="space-y-6 text-on-surface-variant">
+        <section>
+          <h2 class="text-2xl font-bold text-on-surface mt-8 mb-4">¿Usamos cookies?</h2>
+          <p><strong>No.</strong> Este sitio no utiliza cookies propias ni de terceros con fines de seguimiento, publicidad o perfilado.</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-on-surface mt-8 mb-4">Analítica sin cookies</h2>
+          <p>Usamos <a class="text-primary hover:underline" href="https://umami.is" target="_blank" rel="noopener noreferrer">Umami</a>, una herramienta de analítica web autohospedada y respetuosa de la privacidad, que mide el tráfico del sitio sin instalar cookies y sin identificar individualmente a las personas. Toda la data es agregada y anónima.</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-on-surface mt-8 mb-4">Almacenamiento técnico mínimo</h2>
+          <p>El navegador puede guardar datos técnicos esenciales (caché HTTP de assets, preferencias de tema oscuro vía <code class="text-primary">localStorage</code>) que no constituyen cookies y que no se transmiten a terceros.</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-on-surface mt-8 mb-4">Servicios externos</h2>
+          <p>El sitio carga fuentes desde Google Fonts. Google puede registrar la dirección IP del visitante a efectos de servir la fuente. Para más información, consulta la <a class="text-primary hover:underline" href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">política de privacidad de Google</a>. Estamos evaluando migrar a fuentes autohospedadas para eliminar esta dependencia.</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-on-surface mt-8 mb-4">Contacto</h2>
+          <p>Cualquier consulta sobre cookies o privacidad: <a class="text-primary hover:underline" href={`mailto:${PUBLIC_ENVIRONMENTS.COMPANY_EMAIL}`}>{ PUBLIC_ENVIRONMENTS.COMPANY_EMAIL }</a>.</p>
+        </section>
+      </div>
+    </main>
+    <Footer />
+  </div>
+</MainLayout>

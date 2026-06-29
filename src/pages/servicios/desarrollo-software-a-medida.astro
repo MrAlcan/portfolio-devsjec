@@ -1,0 +1,77 @@
+---
+import MainLayout from '../../presentation/web/layouts/MainLayout.astro'
+import ServiceLandingTemplate from '../../presentation/web/components/templates/ServiceLandingTemplate.astro'
+import { buildBreadcrumbSchema, buildServicesSchema, SERVICES } from '../../presentation/web/seo/structuredData'
+
+export const prerender = true
+
+const slug = 'desarrollo-software-a-medida'
+const siteUrl = (Astro.site ?? new URL('https://devsjec.com')).href
+const service = buildServicesSchema(siteUrl).find((s) => (s as any)['@id'].includes(slug))
+const breadcrumb = buildBreadcrumbSchema(siteUrl, [
+  { name: 'Inicio', url: '/' },
+  { name: 'Servicios', url: '/#servicios' },
+  { name: 'Desarrollo a medida', url: `/servicios/${slug}` }
+])
+
+const faqs = [
+  {
+    question: '¿Cuánto cuesta desarrollar software a medida?',
+    answer: 'Depende del alcance, complejidad e integraciones requeridas. Tras una primera conversación de 30 minutos podemos ofrecer una propuesta con rango de costo y cronograma. La mayoría de proyectos a medida en Bolivia se ubican entre los $5.000 y $80.000 USD.'
+  },
+  {
+    question: '¿Cuánto tiempo toma el desarrollo?',
+    answer: 'Un MVP funcional típicamente toma 8-16 semanas; un sistema empresarial completo puede ir de 4 a 12 meses. Trabajamos en sprints de 2 semanas con entregables verificables, así nunca esperas medio año para ver resultados.'
+  },
+  {
+    question: '¿Quién es dueño del código entregado?',
+    answer: 'El cliente. Al cerrar cada hito de pago, transferimos el código fuente, documentación y derechos al cliente. No hay vendor lock-in.'
+  },
+  {
+    question: '¿Qué metodología usan?',
+    answer: 'Una mezcla pragmática: discovery inicial estilo design sprint, desarrollo iterativo en sprints de 2 semanas, demos quincenales con stakeholders, y entrega continua a un entorno de staging. Documentamos decisiones de arquitectura.'
+  },
+  {
+    question: '¿Trabajan con clientes fuera de La Paz?',
+    answer: 'Sí. Atendemos toda Bolivia (Cochabamba, Santa Cruz, El Alto, etc.) y proyectos regionales. La operación es 100% remota con reuniones presenciales puntuales en La Paz si el proyecto lo requiere.'
+  }
+]
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer }
+  }))
+}
+---
+
+<MainLayout
+  title="Desarrollo de Software a Medida en La Paz, Bolivia | DEVSJEC SRL"
+  description="Software a medida en Bolivia: arquitecturas escalables, MVPs en 8-16 semanas, código entregable al cliente. Consultora especializada en La Paz."
+  canonicalUrl={`${siteUrl}servicios/${slug}`}
+  extraSchemas={[service!, breadcrumb, faqSchema]}
+>
+  <ServiceLandingTemplate
+    eyebrow="Desarrollo a Medida"
+    heading="Software a la Medida de tu Negocio en Bolivia"
+    intro="Construimos sistemas que resuelven el problema real de tu operación, no plantillas genéricas. Arquitectura escalable, código mantenible, entrega iterativa."
+    problem="Las soluciones genéricas (SaaS off-the-shelf, plantillas, ERPs cerrados) muchas veces no se ajustan a procesos de negocio bolivianos: facturación electrónica, integraciones con bancos locales, regulaciones de la ASFI, ATT o el SIN. Cuando los flujos críticos requieren forzar a la operación a cambiar para que la herramienta funcione, el costo oculto crece. El software a medida invierte la lógica: la herramienta se ajusta al negocio."
+    approach={[
+      { icon: 'explore', title: 'Discovery', description: 'Entendemos el problema antes de proponer solución. Mapeamos procesos, integraciones, usuarios y restricciones técnicas en una sesión de 1-2 semanas.' },
+      { icon: 'architecture', title: 'Arquitectura', description: 'Diseño técnico documentado: stack, modelo de datos, integraciones, despliegue. Decisiones revisables con el cliente antes de escribir código.' },
+      { icon: 'code', title: 'Desarrollo iterativo', description: 'Sprints de 2 semanas con demo verificable. El cliente ve avance constante y puede pivotar sin pagar deuda técnica acumulada.' },
+      { icon: 'rocket_launch', title: 'Entrega y soporte', description: 'Despliegue en producción, capacitación de equipos, documentación, y opción de soporte mensual posventa.' }
+    ]}
+    technologies={['Go', 'Node.js', 'TypeScript', 'PostgreSQL', 'Redis', 'Docker', 'Kubernetes', 'AWS', 'React', 'Astro']}
+    outcomes={[
+      'Reducción de tiempos operativos del 30-70% al automatizar flujos manuales.',
+      'Eliminación de errores de captura por integración directa entre sistemas.',
+      'Capacidad de escalar sin contratar más operarios.',
+      'Datos consolidados para decisiones (BI / reporting).',
+      'Independencia de proveedores y vendor lock-in.'
+    ]}
+    faqs={faqs}
+  />
+</MainLayout>

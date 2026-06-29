@@ -38,7 +38,9 @@ const items: ItemList[] = [
     <section class="bg-surface-container-low py-32 overflow-hidden" id="nosotros">
         <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div>
-                <h2 class="text-4xl font-headline font-extrabold tracking-tight mb-8">¿Por qué { PUBLIC_ENVIRONMENTS.COMPANY_NAME }?</h2>
+                <p class="text-xs font-mono text-primary uppercase tracking-[0.2em] mb-3">Nuestra diferencia</p>
+                <h2 class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight mb-4">¿Por qué { PUBLIC_ENVIRONMENTS.COMPANY_NAME }?</h2>
+                <div class="h-0.5 w-24 primary-gradient mb-8"></div>
                 <div class="space-y-12">
                     {
                         items.map((item) => (
@@ -52,28 +54,28 @@ const items: ItemList[] = [
                     class="absolute -inset-4 bg-primary/20 blur-2xl rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                 </div>
                 <div
-                    class="relative bg-[#050508] border border-outline-variant/30 rounded-xl overflow-hidden shadow-2xl">
+                    class="relative bg-zinc-950 border border-zinc-800 rounded-xl overflow-hidden shadow-2xl">
                     <div
-                        class="flex items-center gap-2 px-4 py-3 bg-surface-container-high border-b border-outline-variant/30">
+                        class="flex items-center gap-2 px-4 py-3 bg-zinc-900 border-b border-zinc-800">
                         <div class="flex gap-1.5">
-                            <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-                            <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                            <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+                            <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                            <div class="w-3 h-3 rounded-full bg-amber-400"></div>
+                            <div class="w-3 h-3 rounded-full bg-emerald-400"></div>
                         </div>
-                        <div class="text-[10px] font-mono text-outline-variant ml-4 tracking-widest uppercase">
+                        <div class="text-[10px] font-mono text-zinc-500 ml-4 tracking-widest uppercase">
                             architecture.go</div>
                     </div>
                     <div class="p-6 font-mono text-sm overflow-x-auto">
-                        <pre class="text-[#f9f5fd]"><span class="text-secondary">package</span> main
-    <span class="text-primary">func</span> <span class="text-secondary">BuildFuture</span>(project Project) { startCorch }
-        <span class="text-on-surface-variant">// Ensuring high performance architecture</span>
+                        <pre class="text-zinc-100"><span class="text-violet-400">package</span> main
+    <span class="text-indigo-400">func</span> <span class="text-violet-400">BuildFuture</span>(project Project) { startCorch }
+        <span class="text-zinc-500">// Ensuring high performance architecture</span>
         system := Architecture.NewSystem()
-                                
-        <span class="text-primary">for</span> _, requirement := <span class="text-primary">range</span> project.Needs { startCorch }
+
+        <span class="text-indigo-400">for</span> _, requirement := <span class="text-indigo-400">range</span> project.Needs { startCorch }
             system.ImplementScalableSolution(requirement)
         { endCorch }
-                                
-        <span class="text-secondary">return</span> system.DeployToProduction()
+
+        <span class="text-violet-400">return</span> system.DeployToProduction()
     { endCorch }
 
 

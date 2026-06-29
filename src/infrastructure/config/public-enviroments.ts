@@ -21,4 +21,10 @@ export const PUBLIC_ENVIRONMENTS = {
     MEMBER3_ROLE_ES: import.meta.env.PUBLIC_MEMBER3_ROLE_ES,
     MEMBER3_BIO_ES: import.meta.env.PUBLIC_MEMBER3_BIO_ES,
     MEMBER3_PHOTO: import.meta.env.PUBLIC_MEMBER3_PHOTO,
+
+    GSC_VERIFICATION: import.meta.env.PUBLIC_GSC_VERIFICATION,
+    BING_VERIFICATION: import.meta.env.PUBLIC_BING_VERIFICATION,
+
+    UMAMI_SRC: import.meta.env.PUBLIC_UMAMI_SRC,
+    UMAMI_WEBSITE_ID: import.meta.env.PUBLIC_UMAMI_WEBSITE_ID
 } as const

@@ -1,0 +1,77 @@
+---
+import MainLayout from '../../presentation/web/layouts/MainLayout.astro'
+import ServiceLandingTemplate from '../../presentation/web/components/templates/ServiceLandingTemplate.astro'
+import { buildBreadcrumbSchema, buildServicesSchema } from '../../presentation/web/seo/structuredData'
+
+export const prerender = true
+
+const slug = 'devops-y-cloud'
+const siteUrl = (Astro.site ?? new URL('https://devsjec.com')).href
+const service = buildServicesSchema(siteUrl).find((s) => (s as any)['@id'].includes(slug))
+const breadcrumb = buildBreadcrumbSchema(siteUrl, [
+  { name: 'Inicio', url: '/' },
+  { name: 'Servicios', url: '/#servicios' },
+  { name: 'DevOps y Cloud', url: `/servicios/${slug}` }
+])
+
+const faqs = [
+  {
+    question: '¿Trabajan con AWS, Azure o GCP?',
+    answer: 'Con los tres. La elección depende de costo, capacidades regionales (latencia desde Bolivia) y stack existente del cliente. También trabajamos con cloud autohospedado (servidores propios + Kubernetes) cuando hay restricciones de soberanía de datos.'
+  },
+  {
+    question: '¿Pueden auditar nuestra infraestructura actual?',
+    answer: 'Sí. Hacemos cloud assessments que identifican costos optimizables, vulnerabilidades de seguridad, single points of failure y oportunidades de modernización. Entregables: reporte priorizado con impacto y esfuerzo estimado.'
+  },
+  {
+    question: '¿Implementan CI/CD desde cero?',
+    answer: 'Sí. Configuramos pipelines (GitHub Actions, GitLab CI, ArgoCD) con tests automáticos, builds reproducibles, despliegue a staging/prod, rollback automatizado, y notificaciones a Slack/Discord/email.'
+  },
+  {
+    question: '¿Hacen migraciones desde servidores físicos a cloud?',
+    answer: 'Sí. Diseñamos estrategias de migración por fases (lift-and-shift, replatforming, re-architecting) que minimizan downtime y permiten rollback durante el cutover.'
+  },
+  {
+    question: '¿Ofrecen soporte 24/7?',
+    answer: 'Sí, mediante planes de soporte con SLAs de respuesta. Para sistemas críticos diseñamos arquitecturas auto-recuperables que requieren mínima intervención manual.'
+  }
+]
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer }
+  }))
+}
+---
+
+<MainLayout
+  title="DevOps y Cloud Engineering en Bolivia | DEVSJEC SRL"
+  description="CI/CD, Kubernetes, IaC, observabilidad y migraciones cloud para empresas bolivianas. AWS, Azure, GCP y on-premise. Optimizamos costos y uptime."
+  canonicalUrl={`${siteUrl}servicios/${slug}`}
+  extraSchemas={[service!, breadcrumb, faqSchema]}
+>
+  <ServiceLandingTemplate
+    eyebrow="DevOps y Cloud"
+    heading="DevOps y Cloud Engineering Profesional"
+    intro="Pipelines de despliegue confiables, infraestructura como código, observabilidad real y optimización continua de costos cloud."
+    problem="La mayoría de equipos en Bolivia despliegan a producción manualmente desde un laptop, sin tests, sin rollback, y sin monitoreo. El resultado: caídas en momentos críticos, parches de noche, y un equipo que tiene miedo de tocar el sistema. DevOps moderno resuelve esto con automatización."
+    approach={[
+      { icon: 'view_in_ar', title: 'Infraestructura como código', description: 'Terraform, Pulumi o CloudFormation. Toda la infra versionada en git, replicable, auditable.' },
+      { icon: 'rocket_launch', title: 'CI/CD', description: 'Pipelines automatizados con tests, builds reproducibles, despliegue progresivo (canary/blue-green) y rollback en un click.' },
+      { icon: 'monitoring', title: 'Observabilidad', description: 'Logs estructurados, métricas (Prometheus/Grafana), distributed tracing (OpenTelemetry) y alertas accionables.' },
+      { icon: 'savings', title: 'Optimización de costos', description: 'Análisis de gasto cloud, right-sizing de recursos, autoscaling, uso de spot/preemptible. Reducciones típicas del 30-60%.' }
+    ]}
+    technologies={['AWS', 'GCP', 'Azure', 'Kubernetes', 'Docker', 'Terraform', 'Ansible', 'GitHub Actions', 'Prometheus', 'Grafana', 'OpenTelemetry', 'Nginx', 'Traefik']}
+    outcomes={[
+      'Despliegues a producción en minutos, no horas.',
+      'Uptime > 99.9% con auto-recovery.',
+      'Reducción de gasto cloud del 30-60%.',
+      'Capacidad real de crecer sin riesgo operativo.',
+      'Visibilidad completa del comportamiento del sistema.'
+    ]}
+    faqs={faqs}
+  />
+</MainLayout>

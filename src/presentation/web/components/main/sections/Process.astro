@@ -30,16 +30,17 @@ const steps: Step[] = [
     }
 ]
 
-//TODO: Linea conectora entre cards
 ---
 <!-- Process Section -->
-<section class="py-32 px-8 max-w-7xl mx-auto">
+<section class="py-32 px-8 max-w-7xl mx-auto" id="proceso">
     <div class="text-center mb-20">
-        <h2 class="text-4xl font-headline font-extrabold tracking-tight mb-4">Nuestro Proceso</h2>
-        <p class="text-on-surface-variant">De la idea a la producción con precisión quirúrgica.</p>
+        <p class="text-xs font-mono text-primary uppercase tracking-[0.2em] mb-3">Cómo trabajamos</p>
+        <h2 class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight mb-4">Nuestro Proceso</h2>
+        <div class="h-0.5 w-24 primary-gradient mx-auto mb-6"></div>
+        <p class="text-on-surface-variant text-lg">De la idea a la producción con precisión quirúrgica.</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
-        <div class="hidden md:block absolute top-12 left-0 w-full h-px bg-outline-variant/30 -z-10"></div>
+        <div class="hidden md:block absolute top-12 left-[12%] w-[76%] h-0.5 bg-linear-to-r from-transparent via-primary/40 to-transparent -z-10" aria-hidden="true"></div>
         {
             steps.map((step) => (
                 <ProcessStepCard {...step} />
